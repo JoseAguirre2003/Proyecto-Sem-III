@@ -3,21 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>SIMFIQ</title>
 </head>
 <body>
     <header>
-        <ion-icon name="menu"></ion-icon>
-        <h2>Menu</h2>
+        <div class="navbar">
+            <div class="logo"><a href="#">Web dev Creative</a></div>
+            <ul class="link">
+                <li><a href="op1">Screen 1</a></li>
+                <li><a href="op2">Screen 2</a></li>
+                <li><a href="op3">Screen 3</a></li>
+            </ul>
+            <a href="#" class="action_btn">Get Started</a>
+            <div class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+
+            </div>
+        </div>
+        <div class="dropdown_menu">
+            <li><a href="op1">Screen 1</a></li>
+            <li><a href="op2">Screen 2</a></li>
+            <li><a href="op3">Screen 3</a></li>
+            <li><a href="#" class="action_btn">Get Started</a></li>
+        </div>
     </header>
     <main>
-        <section id="difuminado">
+        <section id="hero">
+            <h1>Welcome</h1>
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br>Quo provident maxime laudantium adipisci in repellendus consequuntur non tempore quae deleniti?
+            </p>
 
         </section>
     </main>
-    <footer></footer>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-    <script src="main.js"></script>
+    <script>
+        const toggleBtn=document.querySelector('.toggle_btn')
+        const toggleBtnIcon=document.querySelector('.toggle_btn i')
+        const dropDownMenu=document.querySelector('.dropdown_menu')
+
+        toggleBtn.onclick = function (){
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+
+            toggleBtnIcon.classList = isOpen
+            ? 'fa-solid fa-xmark'
+            : 'fa-solid fa-bars'
+        }
+    </script>
 </body>
 </html>
