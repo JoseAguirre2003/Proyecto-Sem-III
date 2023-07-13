@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html, body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #f3f3f3;
+}
+
+header{
+    display: flex;
+    font-size: 1.4rem;
+    align-items: center;
+    background-color: #6dcd72;
+    color: #f3f3f3;
+    padding: 1%;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#difuminado{
+    height: 800px;
+    width: 800px;
+    border-radius: 1000%;
+    background-color: #6dcd72;
+}
+
+ion-icon{
+    font-size: 2.5rem;
+    margin-right: 0.3rem;
+}
