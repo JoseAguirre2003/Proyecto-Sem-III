@@ -1,18 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'VT323';
+    /* font-family: 'VT323'; */
+    font-family: 'Roboto', sans-serif;
 }
 
 body{
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #000;
     background-image: url(https://images.unsplash.com/photo-1433185000771-ec45c869c61b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80);
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
 }
 
 li{
@@ -59,7 +62,7 @@ header{
 }
 
 .action_btn{
-    background-color: brown;
+    background-color: rgb(165, 42, 42);
     color: black;
     padding: 0.5rem 1rem;
     border: none;
@@ -111,6 +114,13 @@ header{
 
 /* Hero */
 
+#titulo{
+    background-color: rgba(165, 42, 42, 0.5);
+    padding: 1rem;
+    border-radius: 50rem;
+    /* color: #fff; */
+}
+
 section#hero{
     height: calc(100vh - 60px);
     display: flex;
@@ -118,7 +128,9 @@ section#hero{
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: black;
+    /* color: black; */
+    color: #fff;
+    font-weight: 1000;
 }
 #hero h1{
     font-size: 3rem;

@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <title>SIMFIQ</title>
 </head>
 <body>
     <header>
         <div class="navbar">
-            <div class="logo"><a href="#">Web dev Creative</a></div>
+            <div class="logo"><a href="#">SIMFIQ</a></div>
             <ul class="link">
                 <li><a href="op1">Screen 1</a></li>
                 <li><a href="op2">Screen 2</a></li>
@@ -32,26 +31,16 @@
     </header>
     <main>
         <section id="hero">
-            <h1>Welcome</h1>
+            <h1 id="titulo">Sistema de Muestras Físico Químicas</h1>
             <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br>Quo provident maxime laudantium adipisci in repellendus consequuntur non tempore quae deleniti?
             </p>
 
         </section>
+        <section>
+            
+        </section>
     </main>
-    <script>
-        const toggleBtn=document.querySelector('.toggle_btn')
-        const toggleBtnIcon=document.querySelector('.toggle_btn i')
-        const dropDownMenu=document.querySelector('.dropdown_menu')
-
-        toggleBtn.onclick = function (){
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
-
-            toggleBtnIcon.classList = isOpen
-            ? 'fa-solid fa-xmark'
-            : 'fa-solid fa-bars'
-        }
-    </script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
