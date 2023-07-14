@@ -114,13 +114,6 @@ header{
 
 /* Hero */
 
-#titulo{
-    background-color: rgba(165, 42, 42, 0.5);
-    padding: 1rem;
-    border-radius: 50rem;
-    /* color: #fff; */
-}
-
 section#hero{
     height: calc(100vh - 60px);
     display: flex;
@@ -131,10 +124,46 @@ section#hero{
     /* color: black; */
     color: #fff;
     font-weight: 1000;
+    font-size: 0.3rems;
 }
 #hero h1{
+    background-color: rgba(165, 42, 42, 0.5);
+    padding: 1.5%;
+    border-radius: 50rem;
     font-size: 3rem;
     margin-bottom: 1rem;
+}
+
+#hero p{
+    padding: 0% 3%;
+}
+
+/*Que es el SIMFIQ*/
+
+#queEsSimfiq{
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3%;
+}
+
+#queEsSimfiq img{
+    height: 20rem;
+}
+
+#queEsSimfiq h1{
+    color: rgb(165, 42, 42);
+    font-size: 3rem;
+    font-weight: 1200;
+    margin-bottom: 1rem;
+}
+
+#queEsSimfiq div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.6rem;
 }
 
 /* Responsive */
@@ -150,6 +179,10 @@ section#hero{
     .dropdown_menu{
         display: block;
     }
+
+    #hero h1{
+        font-size: 1.85rem;
+    }
 }
 
 @media (max-width: 576px){
@@ -158,5 +191,12 @@ section#hero{
         width: unset;
     }
 
-}
+    #hero h1{
+        font-size: 1rem;
+    }
 
+    #hero p{
+        padding: 0% 5%;
+        font-size: 12px;
+    }
+}
