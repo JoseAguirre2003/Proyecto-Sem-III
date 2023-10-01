@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(https://images.unsplash.com/photo-1433185000771-ec45c869c61b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+}
+
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+}
+a:hover{
+    color: green;
+}
+
+header{
+    position: relative;
+    padding: 0 2rem;
+}
+
+.navbar{
+    width: 100%;
+    height: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .link{
+    display: flex;
+    gap: 2rem;
+}
+
+.container-mlogin{
+    width: 420px;
+    background: transparent; /* background: white; */
+    border: 2px solid rgba(0, 0, 0, 0.61);
+    color:black ;
+    border-radius: 10px;
+    padding: 30px 40px;
+    
+}
+.container-mregister{
+    width: 420px;
+    background: transparent; /* background: white; */
+    border: 2px solid rgba(0, 0, 0, 0.61);
+    color:black ;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.container-mlogin h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.container-mregister{
+    font-size: 36px;
+    text-align: center;
+}
+
+.container-mregister .input-box{
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.container-mlogin .input-box{
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.447);
+    border-radius: 40px;
+    font-size: 16px;
+    color: black;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder{
+    color: black;
+}
+
+.container-mlogin .button{
+    width: 100%;
+    height: 45px;
+    background: black;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: whitesmoke;
+    font-weight: 600;
+}
+.container-mregister .button{
+    width: 100%;
+    height: 45px;
+    background: black;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: whitesmoke;
+    font-weight: 600;
+}
+
+.container-mlogin .regtext{
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.container-mregister .regtext{
+    font-size: 18px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.regtext a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.regtext p a:hover{
+    text-decoration: underline;
+}
+
+footer{
+    font-size: 17.5px;
+}
+

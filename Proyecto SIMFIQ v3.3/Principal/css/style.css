@@ -20,6 +20,16 @@ body{
     background-attachment: fixed;
 }
 
+body::-webkit-scrollbar{
+    width: 0.25rem;
+}
+body::-webkit-scrollbar-track{
+    background: #1e1e1e;
+}
+body::-webkit-scrollbar-thumb{
+    background-color: rgb(165, 42, 42);
+}
+
 li{
     list-style: none;
 }
