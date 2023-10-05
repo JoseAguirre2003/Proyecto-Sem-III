@@ -15,8 +15,11 @@
     <section class="container">
         <?php
             include_once "../php/func.php";
+            include "../../clases/MuestraAgua.php";
+            include "../../clases/MAaProcesar.php";
             if(isset($_GET['buscar']) && is_numeric($_GET['buscar'])) {
-                $muestras = buscarMuestra($_GET['buscar']);
+                $muestras = new MuestraAgua;
+                $muestras = $muestras->buscarMuestra($_GET['buscar']);
                 if (!$muestras)
                     echo "No se han encontrado muestras :(";
                 else{
@@ -84,6 +87,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <form action="../BuscarProdcutor/buscarProdcutorYMuestrasV2.php?buscar='.$muestras['ID_Productor'].'&idElim='.$muestras['ID_Muestra'].'" method="POST">
+                            <button type="button" class="boton"><a href="../registrarMuestraAgua/registrarMuestraAguaV2.php?id='.$muestras['ID_Muestra'].'">Editar</a></button>
+                            <input type="submit" name="eliminar" value="Eliminar" class="boton">
+                        </form>
                     ';
                     $muestrasAProcesar = listaMuestrasAProcesar($_GET['buscar']);
                     if(!$muestrasAProcesar)

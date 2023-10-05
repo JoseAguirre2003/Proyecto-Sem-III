@@ -3,50 +3,7 @@ SEMESTRE III
 SECCION A
 
 JOSE AGUIRRE 30161797
-KAMILA GOMEZ 29945356
+KAMILA GOMEZ 29945356 (Solo en Ingenieria del Solftware)
 SILVIA MENDOZA 28204609
 ANGEL PIÑA 30966360
 EURICK OSPINO 30966360
-
-<html>
-<body>
-  <form id="myForm" method="post" action="registrar.php">
-    <!-- Campos de entrada para los datos del cliente -->
-    <label for="nombre">Nombre:</label>
-    <input type="text" name="nombre" required><br>
-    
-    <label for="email">Email:</label>
-    <input type="email" name="email" required><br>
-    
-    <!-- Campos de entrada para los datos del primer producto -->
-    <label for="producto1">Producto 1:</label>
-    <input type="text" name="producto[]" required><br>
-    
-    <!-- Contenedor para los campos de entrada adicionales -->
-    <div id="productosContainer"></div>
-    
-    <!-- Botón para agregar más campos de entrada -->
-    <button type="button" onclick="agregarCampo()">Agregar producto</button><br>
-    
-    <!-- Botón para enviar el formulario -->
-    <input type="submit" value="Registrar">
-  </form>
-
-  <script>
-    var contadorProductos = 1;
-
-    function agregarCampo() {
-      var container = document.getElementById("productosContainer");
-      var nuevoCampo = document.createElement("div");
-      
-      nuevoCampo.innerHTML = `
-        <label for="producto${contadorProductos + 1}">Producto ${contadorProductos + 1}:</label>
-        <input type="text" name="producto[]" required><br>
-      `;
-      
-      container.appendChild(nuevoCampo);
-      contadorProductos++;
-    }
-  </script>
-</body>
-</html>

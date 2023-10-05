@@ -19,7 +19,39 @@
         include "../../clases/MuestraAgua.php";
         include "../../clases/MAaProcesar.php";
 
-        if(isset($_POST['idProductor'])){
+        if(isset($_GET['id']) && is_numeric($_GET['id'])){
+            $muestra = new MuestraAgua;
+            $muestra = $muestra->buscarMuestra($_GET['id']);
+            if(!$muestra)
+                unset($muestra);
+            else
+                echo "ID de la Muestra a cambiar: ".$muestra['ID_Productor'];
+        }else
+            unset($_GET['id']);
+
+        if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0 && isset($_POST['actualizar'])){
+            $muestra = new MuestraAgua;
+            $muestra->setFechaIngreso($_POST['fehaIngreso']);
+            $muestra->setFuenteAgua($_POST['fuenteAgua']);
+            $muestra->setRecibidoPor($_POST['recibidaPor']);
+            $muestra->setRecolectadaPor($_POST['recolectadaPor']);
+            $muestra->setCultivoARegar($_POST['cultivoARegar']);
+            $muestra->setProblemasDeSales($_POST['problemasSales']);
+            $muestra->setTratamiento_pH($_POST['tratamiento_pH']);
+            $muestra->setSistemaRiego($_POST['sistemaRiego']);
+            $muestra->setCantidadUsada($_POST['cantidadUsada']);
+            $muestra->setPHMetro($_POST['pHMetro']);
+            $muestra->setConductimetro($_POST['condcutimetro']);
+            $muestra->setUbicacion($_POST['ubicacion']);
+            $muestra->setObservacionesGenerales($_POST['observacionesGenerales']);
+            if($muestra->actualizarMuestra($_GET['id'])){
+                echo "<br>ACTUALIZADO CON EXITO :)";
+                $muestra = $muestra->buscarMuestra($_GET['id']);
+            }else{
+                echo "<br>NO SE PUDO ACTUALIZAR :(";
+                unset($muestra);
+            }
+        }else if(isset($_POST['idProductor'])){
             $muestra = new MuestraAgua;
             $muestra->setIdProductor($_POST['idProductor']);
             $muestra->setFechaIngreso($_POST['fehaIngreso']);
@@ -53,150 +85,120 @@
                         $contMuestras++;
                 }
                 echo "Se han guardado $contMuestras";
+                unset($muestra);
             }
         }
-
-        // if (isset($_POST['idProductor'])) {
-        //     if (limpiarCadena($_POST['idProductor']) != "" && limpiarCadena($_POST['fehaIngreso']) != "" && limpiarCadena($_POST['fuenteAgua']) != "" && limpiarCadena($_POST['recibidaPor']) != "" && limpiarCadena($_POST['recolectadaPor']) != "" && limpiarCadena($_POST['cultivoARegar']) != "" && limpiarCadena($_POST['problemasSales']) != "" && limpiarCadena($_POST['tratamiento_pH']) != "" && limpiarCadena($_POST['sistemaRiego']) != "" && !is_numeric($_POST['cantidadUsada']) && !is_numeric($_POST['pHMetro']) && !is_numeric($_POST['condcutimetro']) && limpiarCadena($_POST['ubicacion']) != "" && limpiarCadena($_POST['observacionesGenerales']) != "") {
-        //         $respuesta = guardarMuestraAgua($_POST['idProductor'], $_POST['fehaIngreso'], $_POST['fuenteAgua'], $_POST['recibidaPor'], $_POST['recolectadaPor'], $_POST['cultivoARegar'], $_POST['problemasSales'], $_POST['tratamiento_pH'], $_POST['sistemaRiego'], $_POST['cantidadUsada'], $_POST['pHMetro'], $_POST['condcutimetro'], $_POST['ubicacion'], $_POST['observacionesGenerales']);
-        //         echo "<h3>" . $respuesta . "</h3>";
-        //     } else
-        //         echo "DATO ERRADO";
-        // }
+        
         ?>
         <form action="" method="POST" class="form">
             <div class="imput-box">
                 <label for="idProductor">ID Productor:</label>
-                <input type="text" placeholder="ID del prodcutor" name="idProductor" id="idProductor">
+                <input type="text" placeholder="ID del prodcutor" name="idProductor" id="idProductor" value=<?php if(isset($muestra)) echo '"'.$muestra['ID_Productor'].'" disabled';?>>
             </div>
 
             <div class="imput-box">
                 <label for="fehaIngreso">Fecha de Ingreso:</label>
-                <input type="date" name="fehaIngreso" id="fehaIngreso">
+                <input type="date" name="fehaIngreso" id="fehaIngreso" value="<?php if(isset($muestra)) echo $muestra['Fecha_Ingreso'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="fuenteAgua">Fuente de Agua:</label>
-                <input type="text" placeholder="Fuente de agua" name="fuenteAgua" id="fuenteAgua">
+                <input type="text" placeholder="Fuente de agua" name="fuenteAgua" id="fuenteAgua" value="<?php if(isset($muestra)) echo $muestra['Fuente_Agua'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="recibidaPor">Recibida por:</label>
-                <input type="text" placeholder="Recibida por..." name="recibidaPor" id="recibidaPor">
+                <input type="text" placeholder="Recibida por..." name="recibidaPor" id="recibidaPor" value="<?php if(isset($muestra)) echo $muestra['Recibido_Por'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="recolectadaPor">Recolectada por:</label>
-                <input type="text" placeholder="Recolectada por..." name="recolectadaPor" id="recolectadaPor">
+                <input type="text" placeholder="Recolectada por..." name="recolectadaPor" id="recolectadaPor" value="<?php if(isset($muestra)) echo $muestra['Recolectada_Por'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="cultivoARegar">Cultivo a Regar:</label>
-                <input type="text" placeholder="Cultivo a Regar" name="cultivoARegar" id="cultivoARegar">
+                <input type="text" placeholder="Cultivo a Regar" name="cultivoARegar" id="cultivoARegar" value="<?php if(isset($muestra)) echo $muestra['Cultivo_A_Regar'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="problemasSales">Problemas de Sales:</label>
                 <select name="problemasSales" id="problemasSales">
-                    <option value="No lo se">No lo se</option>
-                    <option value="Si">Si</option>
-                    <option value="No">No</option>
+                    <option value="No lo se" <?php if(isset($muestra) && $muestra['Problemas_De_Sales'] == "No lo se") echo "selected";?>>No lo se</option>
+                    <option value="Si" <?php if(isset($muestra) && $muestra['Problemas_De_Sales'] == "Si") echo "selected";?>>Si</option>
+                    <option value="No" <?php if(isset($muestra) && $muestra['Problemas_De_Sales'] == "No") echo "selected";?>>No</option>
                 </select>
             </div>
 
             <div class="imput-box">
                 <label for="tratamiento_pH">Tratamiendo del pH:</label>
-                <input type="text" placeholder="Tratamiento pH" name="tratamiento_pH" id="tratamiento_pH">
+                <input type="text" placeholder="Tratamiento pH" name="tratamiento_pH" id="tratamiento_pH" value="<?php if(isset($muestra)) echo $muestra['Tratamiento_pH'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="sistemaRiego">Sistema de riego:</label>
-                <input type="text" placeholder="Sistema de riego" name="sistemaRiego" id="sistemaRiego">
+                <input type="text" placeholder="Sistema de riego" name="sistemaRiego" id="sistemaRiego" value="<?php if(isset($muestra)) echo $muestra['Sistema_Riego'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="cantidadUsada">Cantidad usada:</label>
-                <input type="number" name="cantidadUsada" id="cantidadUsada">
+                <input type="number" name="cantidadUsada" id="cantidadUsada" value="<?php if(isset($muestra)) echo $muestra['Cantidad_Usada'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="pHMetro">ph Metro:</label>
-                <input type="number" name="pHMetro" id="pHMetro" step="0.01">
+                <input type="number" name="pHMetro" id="pHMetro" step="0.01" value="<?php if(isset($muestra)) echo $muestra['pH_Metro'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="condcutimetro">Conductimetro:</label>
-                <input type="number" name="condcutimetro" id="condcutimetro" step="0.0001">
+                <input type="number" name="condcutimetro" id="condcutimetro" step="0.0001" value="<?php if(isset($muestra)) echo $muestra['Conductimetro'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="ubicacion">Ubicacion:</label>
-                <input type="text" placeholder="Ubicacion" name="ubicacion" id="ubicacion">
+                <input type="text" placeholder="Ubicacion" name="ubicacion" id="ubicacion" value="<?php if(isset($muestra)) echo $muestra['Ubicacion'];?>">
             </div>
 
             <div class="imput-box">
                 <label for="observacionesGenerales">Observaciones generales:</label>
-                <input type="text" placeholder="Observaciones" name="observacionesGenerales"
-                    id="observacionesGenerales">
+                <input type="text" placeholder="Observaciones" name="observacionesGenerales" id="observacionesGenerales" value="<?php if(isset($muestra)) echo $muestra['Observaciones_Generales'];?>">
             </div>
 
-            <div class="imput-box">
-                <header>Ingreso de datos de Muestra(s) a porcesar:</header>
-            </div>
+            <?php 
+                if(!isset($muestra)){
+                    echo '
+                        <div class="imput-box">
+                            <header>Ingreso de datos de Muestra(s) a porcesar:</header>
+                        </div>
+                        <div id="mustrasAProcesar">
+                            <div>
+                                <h1>Muestra 1</h1>
+                                <div class="imput-box">
+                                    <label for="identificador">Identificador:</label>
+                                    <input type="text" placeholder="Indentificador" name="muestraAP[0][identificar]" id="identificador">
+                                </div>
+                                <div class="imput-box">
+                                    <label for="analisisARealizar">Analisis a realizar:</label>
+                                    <input type="text" placeholder="Analisis a realizar" name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
+                                </div>
+                                <div class="imput-box">
+                                    <label for="fechaDeToma">Fecha de toma:</label><br>
+                                    <input type="date" name="muestraAP[0][fechaDeToma]" id="fechaDeToma">
+                                </div>
+                                <div class="imput-box">
+                                    <label for="observaciones">Observaciones</label><br>
+                                    <input type="text" placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones">
+                                </div>
+                            </div>
+                        </div>
+                        <br><input type="button" value="Agregar" class="boton" id="btnAgregarMAP">
+                    ';      
+                }
+            ?>
 
-            <div id="mustrasAProcesar">
-                <!-- <div>
-                    <h1>Muestra 1</h1>
-
-                    <div class="imput-box">
-                        <label for="identificador">Identificador:</label>
-                        <input type="text" placeholder="Indentificador" name="identificador[]" id="identificador">
-                    </div>
-
-                    <div class="imput-box">
-                        <label for="analisisARealizar">Analisis a realizar:</label>
-                        <input type="text" placeholder="Analisis a realizar" name="analisisARealizar[]"
-                            id="analisisARealizar">
-                    </div>
-
-                    <div class="imput-box">
-                        <label for="fechaDeToma">Fecha de toma:</label><br>
-                        <input type="date" name="fechaDeToma[]" id="fechaDeToma">
-                    </div>
-
-                    <div class="imput-box">
-                        <label for="observaciones">Observaciones</label><br>
-                        <input type="text" placeholder="Observaciones..." name="observaciones[]" id="observaciones">
-                    </div>
-                </div> -->
-                <div>
-                    <h1>Muestra 1</h1>
-
-                    <div class="imput-box">
-                        <label for="identificador">Identificador:</label>
-                        <input type="text" placeholder="Indentificador" name="muestraAP[0][identificar]" id="identificador">
-                    </div>
-
-                    <div class="imput-box">
-                        <label for="analisisARealizar">Analisis a realizar:</label>
-                        <input type="text" placeholder="Analisis a realizar" name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
-                    </div>
-
-                    <div class="imput-box">
-                        <label for="fechaDeToma">Fecha de toma:</label><br>
-                        <input type="date" name="muestraAP[0][fechaDeToma]" id="fechaDeToma">
-                    </div>
-
-                    <div class="imput-box">
-                        <label for="observaciones">Observaciones</label><br>
-                        <input type="text" placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones">
-                    </div>
-                </div>
-            </div>
-
-            <br><input type="button" value="Agregar" class="boton" id="btnAgregarMAP">
-
-            <input type="submit" value="Guardar" class="button">
+            
+            <input type="submit" name="<?php if(isset($_GET['id'])) echo "actualizar"; else echo "guardar"; ?>" value="Guardar" class="button">
         </form>
     </section>
     <script src="../../js/JQuery-3.7.1/JQuery-3.7.1.min.js"></script>

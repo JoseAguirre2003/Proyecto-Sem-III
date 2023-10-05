@@ -24,7 +24,7 @@
         include "../../clases/Productor.php";
         $productores = new Prodcutor;
 
-        if(isset($_POST['eliminar'])){
+        if(isset($_POST['eliminar']) && (isset($_GET['idElim']) && is_numeric($_GET['idElim']))){
             if($productores->eliminarProductor($_GET['idElim']))
                 echo "Sea Eliminado el Productor de ID: ".$_GET['idElim'];
             else

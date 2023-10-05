@@ -13,15 +13,12 @@
             <?php 
                 
                 include_once "../php/func.php";
-                // if(isset($_POST['editar']))
-                //     echo "editar";
                 include "../../clases/Productor.php";
 
                 if(isset($_GET['id']) && is_numeric($_GET['id'])){
                     $productor = new Prodcutor;
                     $productor = $productor->buscarProductor($_GET['id']);
                     echo "ID del prodcutor Productor a cambiar: ".$productor['ID_Productor'];
-                    $idProductorCambiar = $productor['ID_Productor'];
                     if(!$productor)
                         unset($productor);
                 }else

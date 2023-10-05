@@ -168,7 +168,7 @@
 
         public function actualizarMuestra($id){
             $peticion = conexion();
-            $peticion = $peticion->prepare("UPDATE `muestra_agua` SET `ID_Productor` = '".$this->idProductor."', `Fecha_Ingreso` = '".$this->fechaIngreso."', `Fuente_Agua` = '".$this->fuenteAgua."', `Recibido_Por` = '".$this->recibidoPor."', `Recolectada_Por` = '".$this->recolectadaPor."', `Cultivo_A_Regar` = '".$this->cultivoARegar."', `Problemas_De_Sales` = '".$this->problemasDeSales."', `Tratamiento_pH` = '".$this->tratamiento_pH."', `Sistema_Riego` = '".$this->sistemaRiego."', `Cantidad_Usada` = '".$this->cantidadUsada."', `pH_Metro` = '".$this->pHMetro."', `Conductimetro` = '".$this->conductimetro."', `Ubicacion` = '".$this->ubicacion."', `Observaciones_Generales` = '".$this->observacionesGenerales."' WHERE `ID_Muestra` = ".$id.";");
+            $peticion = $peticion->prepare("UPDATE `muestra_agua` SET `Fecha_Ingreso` = '".$this->fechaIngreso."', `Fuente_Agua` = '".$this->fuenteAgua."', `Recibido_Por` = '".$this->recibidoPor."', `Recolectada_Por` = '".$this->recolectadaPor."', `Cultivo_A_Regar` = '".$this->cultivoARegar."', `Problemas_De_Sales` = '".$this->problemasDeSales."', `Tratamiento_pH` = '".$this->tratamiento_pH."', `Sistema_Riego` = '".$this->sistemaRiego."', `Cantidad_Usada` = '".$this->cantidadUsada."', `pH_Metro` = '".$this->pHMetro."', `Conductimetro` = '".$this->conductimetro."', `Ubicacion` = '".$this->ubicacion."', `Observaciones_Generales` = '".$this->observacionesGenerales."' WHERE `ID_Muestra` = ".$id.";");
             $peticion->execute();
             if($peticion->rowCount() == 1){
                 $peticion = null;

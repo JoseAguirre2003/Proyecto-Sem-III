@@ -13,15 +13,20 @@
 
     <body>
     <section class="container">
-        <!-- <form action="" method="POST">
-            <label for="buscar">Buscar:</label><br>
-            <input type="text" name="buscar" id="buscar">
-            <input type="submit" value="Buscar" class="boton">
-        </form> -->
         <?php
             include_once "../php/func.php";
             include "../../clases/Productor.php";
+            include "../../clases/MuestraAgua.php";
             $productor = new Prodcutor;
+            $muestra = new MuestraAgua;
+
+            if(isset($_POST['eliminar']) && (isset($_GET['idElim']) && is_numeric($_GET['idElim']))){
+                if($muestra->eliminarMuestra($_GET['idElim']))
+                    echo "Sea Eliminado la muestra de ID: ".$_GET['idElim'];
+                else
+                    echo "No pudo elimiar la muestra de ID: ".$_GET['idElim'];
+            }
+
             if(isset($_GET['buscar']) && is_numeric($_GET['buscar'])) {
                 $productor = $productor->buscarProductor($_GET['buscar']);
                 if (!$productor)
@@ -81,6 +86,21 @@
                     if(!$muestras)
                         echo "No se han encontrado muestras";
                     else{
+                        // echo '
+                        //     <table id="resultado">
+                        //         <tbody>
+                        //             <tr>
+                        //                 <th colspan="6">Muestras:</th>
+                        //             </tr>
+                        //             <tr>
+                        //                 <th>ID</th>
+                        //                 <th>Fecha de Ingreso</th>
+                        //                 <th>Fuente de Agua</th>
+                        //                 <th>Recolectada por</th>
+                        //                 <th colspan="2">Opciones</th>
+                        //             </tr>
+                                
+                        // ';
                         echo '
                             <table id="resultado">
                                 <tbody>
@@ -92,20 +112,27 @@
                                         <th>Fecha de Ingreso</th>
                                         <th>Fuente de Agua</th>
                                         <th>Recolectada por</th>
-                                        <th colspan="2">Opciones</th>
                                     </tr>
                                 
                         ';
 
                         foreach($muestras as $row){
+                            // echo '
+                            //     <tr>
+                            //         <td><a href="../VerMuestras/verMuestras.php?buscar='.$row['ID_Muestra'].'">'.$row['ID_Muestra'].'</a></td>
+                            //         <td>'.$row['Fecha_Ingreso'].'</td>
+                            //         <td>'.$row['Fuente_Agua'].'</td>
+                            //         <td>'.$row['Recolectada_Por'].'</td>
+                            //         <td>*Editar*</td>
+                            //         <td>*Eliminar*</td>
+                            //     </tr>
+                            // ';
                             echo '
                                 <tr>
                                     <td><a href="../VerMuestras/verMuestras.php?buscar='.$row['ID_Muestra'].'">'.$row['ID_Muestra'].'</a></td>
                                     <td>'.$row['Fecha_Ingreso'].'</td>
                                     <td>'.$row['Fuente_Agua'].'</td>
                                     <td>'.$row['Recolectada_Por'].'</td>
-                                    <td>*Editar*</td>
-                                    <td>*Eliminar*</td>
                                 </tr>
                             ';
                         }
