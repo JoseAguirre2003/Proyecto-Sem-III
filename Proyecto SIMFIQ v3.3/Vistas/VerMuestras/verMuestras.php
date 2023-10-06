@@ -19,6 +19,7 @@
             include "../../clases/MAaProcesar.php";
             if(isset($_GET['buscar']) && is_numeric($_GET['buscar'])) {
                 $muestras = new MuestraAgua;
+                $muestrasAProcesar = new MAaProcesar;
                 $muestras = $muestras->buscarMuestra($_GET['buscar']);
                 if (!$muestras)
                     echo "No se han encontrado muestras :(";
@@ -92,7 +93,7 @@
                             <input type="submit" name="eliminar" value="Eliminar" class="boton">
                         </form>
                     ';
-                    $muestrasAProcesar = listaMuestrasAProcesar($_GET['buscar']);
+                    $muestrasAProcesar = $muestrasAProcesar->listarMuestrasAProcrsar($_GET['buscar']);
                     if(!$muestrasAProcesar)
                         echo "No se han encontrado muestras a procesar";
                     else{

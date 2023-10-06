@@ -25,7 +25,7 @@
             if(!$muestra)
                 unset($muestra);
             else
-                echo "ID de la Muestra a cambiar: ".$muestra['ID_Productor'];
+                echo "ID de la Muestra a cambiar: ".$muestra['ID_Muestra'];
         }else
             unset($_GET['id']);
 

@@ -118,25 +118,7 @@
                 return false;
             }
         }
-
-        // public function actualizarProdcutor($id){
-        //     $peticion = buscarProductor($id);
-        //     if(!$peticion){
-        //         return false;
-        //     }else{
-        //         $peticion = conexion();
-        //         $peticion = $peticion->prepare("UPDATE `productor` SET `Nombre` = '".$this->nombre."', `Cedula_RIF` = '".$this->ciRIF."', `Direccion` = '".$this->direccion."', `Localidad` = '".$this->localidad."', `Municipio` = '".$this->municipio."', `Contacto` = '".$this->contacto."', `Traido_Por` = '".$this->traidoPor."', `Correo` = '".$this->correo."', `Asesor_Tecnico` = '".$this->asesorTecnico."' WHERE `ID_Productor` = ".$id.";");
-        //         $peticion->execute();
-        //         if($peticion->rowCount() == 1){
-        //             $peticion = null;
-        //             return true;
-        //         }else {
-        //             $peticion = null;
-        //             return false;
-        //         }
-        //     }
-        // }
-
+        
         public function eliminarProductor($id){
             $peticion = conexion();
             $peticion = $peticion->prepare("DELETE FROM `productor` WHERE `ID_Productor` = ".$id.";");

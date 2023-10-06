@@ -191,6 +191,15 @@
                 return false;
             }
         }
+
+        public function listarMuestras($id){
+            $peticion = conexion();
+            $peticion = $peticion->prepare("SELECT * FROM `muestra_agua` WHERE `ID_Productor` = '$id';");
+            $peticion->execute();
+            $array = $peticion->fetchAll();
+            $peticion = null;
+            return $array;
+        }
     }
 
 ?>

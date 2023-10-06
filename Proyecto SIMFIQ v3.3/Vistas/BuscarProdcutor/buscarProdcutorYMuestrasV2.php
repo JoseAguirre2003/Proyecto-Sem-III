@@ -82,7 +82,8 @@
                         </form>
                     ';
                         //ESOS BOTONES DE ELIMINAR Y EDITAR HAY QUE PONERLOS DE MANERA MA OPTIMA, NO SE ESTA MUY FEO ASI
-                    $muestras = listaMuestras($productor['ID_Productor']);
+                    
+                    $muestras = $muestra->listarMuestras($productor['ID_Productor']);
                     if(!$muestras)
                         echo "No se han encontrado muestras";
                     else{

@@ -78,7 +78,7 @@
         
         public function actualizarMuestraAProcesar($id){
             $peticion = conexion();
-            $peticion= $peticion->prepare("UPDATE `muestra_agua_a_procesar` SET `IDMuestra` = '".$this->idMuestra."', `Identificador` = '".$this->identificador."', `Analisis_A_Realizar` = '".$this->analisisARealizar."', `Fecha_De_Toma` = '".$this->fechaDeToma."', `Observaciones` = '".$this->observaciones."' WHERE `IDMuestra_A_Procesar` = ".$id.";");
+            $peticion= $peticion->prepare("UPDATE `muestra_agua_a_procesar` SET `Identificador` = '".$this->identificador."', `Analisis_A_Realizar` = '".$this->analisisARealizar."', `Fecha_De_Toma` = '".$this->fechaDeToma."', `Observaciones` = '".$this->observaciones."' WHERE `IDMuestra_A_Procesar` = ".$id.";");
             $peticion->execute();
             if($peticion->rowCount() == 1){
                 $peticion = null;
@@ -102,9 +102,14 @@
             }
         }
 
-        // public function listarMuestrasAProcrsar(){
-
-        // }
+        public function listarMuestrasAProcrsar($id){
+            $peticion = conexion();
+            $peticion = $peticion->prepare("SELECT * FROM `muestra_agua_a_procesar` WHERE `IDMuestra` = '$id';");
+            $peticion->execute();
+            $array = $peticion->fetchAll();
+            $peticion = null;
+            return $array;
+        }
         
     }
 
