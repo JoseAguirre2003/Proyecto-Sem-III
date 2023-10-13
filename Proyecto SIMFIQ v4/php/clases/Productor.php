@@ -84,13 +84,21 @@
         }
 
         public function guardarProductor(){
-            $peticion = conexion();
-            $peticion = $peticion->prepare("INSERT INTO `productor` (`Nombre`, `Cedula_RIF`, `Direccion`, `Localidad`, `Municipio`, `Contacto`, `Traido_Por`, `Correo`, `Asesor_Tecnico`) 
+            $conexion = conexion();
+            $peticion = $conexion->prepare("INSERT INTO `productor` (`Nombre`, `Cedula_RIF`, `Direccion`, `Localidad`, `Municipio`, `Contacto`, `Traido_Por`, `Correo`, `Asesor_Tecnico`) 
                                             VALUES ('".$this->nombre."', '".$this->ciRIF."', '".$this->direccion."', '".$this->localidad."', '".$this->municipio."', '".$this->contacto."', '".$this->traidoPor."', '".$this->correo."', '".$this->asesorTecnico."');");
             $peticion->execute();
             if($peticion->rowCount() == 1){
-                $peticion = null;
-                return true;
+                $peticion = $conexion;
+                $idProd = $peticion->query("SELECT LAST_INSERT_ID()")->fetch()[0];
+                if(!$peticion->query("INSERT INTO `userxprod` (`IdUser`, `IdProductor`) VALUES ('".$_SESSION['s_id']."', '".$idProd."')")){
+                    $peticion->query("DELETE FROM `productor` WHERE `ID_Productor` = ".$idProd.";");
+                    $peticion = null;
+                    return false;
+                }else{ 
+                    $peticion = null;
+                    return true;
+                }
             }else{
                 $peticion = null;
                 return false;
@@ -134,14 +142,26 @@
 
         public function listarProductores($pagina, $registros, $busqueda){
             $inicio = ($pagina > 0) ? (($pagina * $registros) - $registros) : 0;
-
-            if(isset($busqueda) && $busqueda != ""){
-                // $consultaDatos = "SELECT * FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%' LIMIT $inicio, $registros;";    
-                $consultaDatos = "SELECT * FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%';";
-                // $consultaTotal = "SELECT COUNT(ID_Productor) FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%';";
+            
+            if($_SESSION['s_idRol'] == 1){
+                if(isset($busqueda) && $busqueda != ""){
+                    // $consultaDatos = "SELECT * FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%' LIMIT $inicio, $registros;";    
+                    $consultaDatos = "SELECT * FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%';";
+                    // $consultaTotal = "SELECT COUNT(ID_Productor) FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%';";
+                }else{
+                    $consultaDatos = "SELECT * FROM productor LIMIT $inicio, $registros;"; 
+                    // $consultaTotal = "SELECT COUNT(ID_Productor) FROM productor;";
+                }
             }else{
-                $consultaDatos = "SELECT * FROM productor LIMIT $inicio, $registros;";    
-                // $consultaTotal = "SELECT COUNT(ID_Productor) FROM productor;";
+                if(isset($busqueda) && $busqueda != ""){
+                    // $consultaDatos = "SELECT * FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%' LIMIT $inicio, $registros;";    
+                    // $consultaDatos = "SELECT * FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%';";
+                    $consultaDatos = "SELECT productor.* FROM productor INNER JOIN userxprod ON productor.ID_Productor = userxprod.IdProductor WHERE (userxprod.IdUser = ".$_SESSION['s_id'].") AND (ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%') ORDER BY productor.ID_Productor ASC;";
+                    // $consultaTotal = "SELECT COUNT(ID_Productor) FROM productor WHERE ID_Productor LIKE '$busqueda' OR Nombre LIKE '%$busqueda%' OR Cedula_RIF LIKE '%$busqueda%';";
+                }else{
+                    $consultaDatos = "SELECT productor.* FROM productor INNER JOIN userxprod ON productor.ID_Productor = userxprod.IdProductor WHERE userxprod.IdUser = ".$_SESSION['s_id']." ORDER BY productor.ID_Productor ASC;";    
+                    // $consultaTotal = "SELECT COUNT(ID_Productor) FROM productor;";
+                }
             }
 
             $conexion = conexion();

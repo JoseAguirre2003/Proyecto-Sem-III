@@ -2,6 +2,7 @@
     <div class="logo"><a href="index.php?vista=Inicio">SIMFIQ</a></div>
     <nav class="navbar">
         <a href="./php/logout.php">Logout</a>
+        <a href="">Usuarios</a>
         <a href="./registarProductor.php">Registrar Productor</a>
         <a href="./listaProductores.php">Lista de Productores</a>
         <a href="./registrarMuestraAgua.php">Registrar Muestras de Agua</a>

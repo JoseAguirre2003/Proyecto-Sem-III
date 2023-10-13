@@ -41,10 +41,9 @@
     
 </div>
 
- <script src="./js/jquery/jquery-3.3.1.min.js"></script>
- <script src="./js/popper/popper.min.js"></script>
-
- <script src="./js/plugin/sweet_alert2/sweetalert2.all.min.js"></script>
- <script src="./js/codigo.js"></script>
+<script src="./js/jquery/jquery-3.3.1.min.js"></script>
+<script src="./js/popper/popper.min.js"></script>
+<script src="./js/plugin/sweet_alert2/sweetalert2.all.min.js"></script>
+<script src="./js/codigo.js"></script>
 </body>
 </html>

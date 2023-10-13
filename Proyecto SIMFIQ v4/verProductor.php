@@ -1,16 +1,23 @@
 <?php
-// session_start();
+session_start();
 
+if ($_SESSION["s_usuario"] === null){
+    header("Location: ./index.php?vista=login");
+}
 
-// if ($_SESSION["s_usuario"] === null) {
-//     header("Location:../indexlogin.php");
-// } else {
-//     if ($_SESSION["s_idRol"] != 1) {
-//         header("Location: pag_inicio_user.php");
-//     }
-// }
     include "./inc/htmlOpen.php";
-    include "./inc/headerAndNav.php";
+
+    
+    if(isset($_SESSION['s_idRol']))
+        if($_SESSION['s_idRol'] == 1){
+            $rol = "Admin";
+            include "./inc/headerAndNavAdmin.php";
+        }else{
+            $rol = "Usuario";
+            include "./inc/headerAndNav.php";
+        }
+    else
+        header("./logout.php");
 ?>
 
 <section class="container">
@@ -77,7 +84,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <form action="./listaProductores.phpp?idElim='.$productor['ID_Productor'].'" method="POST">
+                        <form action="./listaProductores.php?idElim='.$productor['ID_Productor'].'" method="POST">
                             <button type="button" class="boton"><a href="./registarProductor.php?id='.$productor['ID_Productor'].'">Editar</a></button>
                             <input type="submit" name="eliminar" value="Eliminar" class="boton">
                         </form>

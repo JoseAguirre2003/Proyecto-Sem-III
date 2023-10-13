@@ -10,7 +10,7 @@ $('#loginform').submit(function(e){
         return false;
     }else{    
         $.ajax({
-          url:"bd/login.php",
+          url:"./php/login.php",
           type:"POST",    
           datatype:"json",    
           data:  {usuario:usuario, password:password},    
@@ -21,7 +21,8 @@ $('#loginform').submit(function(e){
                       type: 'error',
                       title: 'Usuario y/o Password incorrectas',                          
                     });                    
-              }else{                  
+              }else{     
+                  console.log(data + "aaa");           
                   Swal.fire({
                       type: 'success',                          
                       title: '¡Conexión exitosa!',                                                
@@ -29,7 +30,7 @@ $('#loginform').submit(function(e){
                       confirmButtonText: 'Ingresar'
                     }).then((result) => {
                       if (result.value) {
-                          window.location.href = "vistas/pag_inicio.php";                          
+                          window.location.href = "index.php?vista=Inicio";                          
                       }
                     })                                                               
               }

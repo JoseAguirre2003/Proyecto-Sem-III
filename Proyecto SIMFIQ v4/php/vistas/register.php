@@ -1,5 +1,5 @@
 <?php
-require_once("bd/connection.php");
+require_once("./php/clases/connection.php");
 $objeto = new Conexion();
 $connection = $objeto->Conectar();
 
@@ -63,7 +63,7 @@ if (isset($_POST["register"])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="./css/styleLogin.css">
         <title>Document</title>
     </head>
 
@@ -72,7 +72,7 @@ if (isset($_POST["register"])) {
         <div class="container-mregister">
             <div id="login">
                 <h1>Registrar</h1>
-                <form name="registerform" id="registerform" action="register.php" method="post">
+                <form name="registerform" id="registerform" action="?vista=register" method="post">
                     <p>
                     <div class="input-box">
                         <input type="text" placeholder="Nombre Completo" name="fullname" id="fullname" class="input"
@@ -103,7 +103,7 @@ if (isset($_POST["register"])) {
                     <p class="submit">
                         <input type="submit" name="register" id="register" class="button" value="Registrar" />
                     </p>
-                    <p class="regtext">Ya tienes cuenta? <a href="indexlogin.php">Entra aqui</a>!</p>
+                    <p class="regtext">Ya tienes cuenta? <a href="?vista=login">Entra aqui</a>!</p>
                 </form>
             </div>
 
