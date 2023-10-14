@@ -8,10 +8,21 @@
 </head>
 <body>
 <header>
-        <div class="navbar">
-            <div class="logo"><a href="#">SIMFIQ</a></div>
-            <a href="index.php?vista=login" class="action_btn">Get Started</a>
-        </div>
+        <nav id="navbar" class="icon">
+            <a href="#" class="brand">
+                <span><ion-icon name="flask-outline"></ion-icon></span>
+                <span>SIMFQ</span>
+            </a>
+            <ul>
+               <li style="--i:0;">
+               <a href="index.php?vista=login" class="action_btn">
+                <span>Login</span>
+                <span><ion-icon name="key-outline" size="large"></ion-icon></span>
+               </a>
+            </li> 
+            </ul>
+           
+        </nav>
 </header>
     <main>
         <section id="hero">
@@ -96,6 +107,9 @@
         </div>
         <p>©Copyright 2023</p>
     </footer>
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="./js/Scroll.js"></script>
 </body>
 </html>
