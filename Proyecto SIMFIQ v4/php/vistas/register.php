@@ -71,8 +71,9 @@ if (isset($_POST["register"])) {
 
         <div class="container-mregister">
             <div id="login">
-                <h1>Registrar</h1>
+                
                 <form name="registerform" id="registerform" action="?vista=register" method="post">
+                    <h1>Registrar</h1>
                     <p>
                     <div class="input-box">
                         <input type="text" placeholder="Nombre Completo" name="fullname" id="fullname" class="input"
@@ -103,7 +104,9 @@ if (isset($_POST["register"])) {
                     <p class="submit">
                         <input type="submit" name="register" id="register" class="button" value="Registrar" />
                     </p>
-                    <p class="regtext">Ya tienes cuenta? <a href="?vista=login">Entra aqui</a>!</p>
+                    <div class="regtext">
+                    <a href="?vista=login">Login</a>
+                    </div>
                 </form>
             </div>
 

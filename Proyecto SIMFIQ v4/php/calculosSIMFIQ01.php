@@ -140,7 +140,7 @@ function calculaCeAgua($CeAgua1, $CeAgua2, $CeAgua) {
     return [false, "El valor debe ser un número mayor que 0"];
   }
 
-   $CeSuelo = ($CeAgua1 + $CeAgua2) / 2;
+  $CeAgua = ($CeAgua1 + $CeAgua2) / 2;
 
   return [true, $CeAgua];
 }

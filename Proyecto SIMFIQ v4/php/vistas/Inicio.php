@@ -18,6 +18,7 @@ if ($_SESSION["s_usuario"] === null){
         }
     else
         header("./logout.php");
-    echo "Bienvenid@ ". $_SESSION['s_usuario']."<br>Rol: ".$rol; 
+        
+        echo "Bienvenid@ ". $_SESSION['s_usuario']."<br>Rol: ".$rol; 
     include "./inc/htmlClose.php";
 ?>

@@ -19,144 +19,200 @@ body{
 
 }
 
-li{
-    list-style: none;
-}
-a{
-    text-decoration: none;
-    color: black;
-    font-size: 1rem;
-}
-a:hover{
-    color: green;
-}
-
-header{
-    position: relative;
-    padding: 0 2rem;
-}
-
-.navbar{
-    width: 100%;
-    height: 60px;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.navbar .link{
-    display: flex;
-    gap: 2rem;
-}
-
 .container-mlogin{
-    width: 420px;
-    background: transparent; /* background: white; */
-    border: 2px solid rgba(0, 0, 0, 0.61);
-    color:black ;
-    border-radius: 10px;
-    padding: 30px 40px;
-    
+    position: relative;
+    width: 370px;
+    height: 450px;
+    background: #fff;
+    border-radius: 50px 5px;
+    overflow: hidden;
 }
 .container-mregister{
-    width: 420px;
-    background: transparent; /* background: white; */
-    border: 2px solid rgba(0, 0, 0, 0.61);
-    color:black ;
-    border-radius: 10px;
-    padding: 30px 40px;
+    position: relative;
+    width: 500px;
+    height: 580px;
+    background: #fff;
+    border-radius: 50px 5px;
+    overflow: hidden;
 }
 
-.container-mlogin h1{
-    font-size: 36px;
+.container-mlogin::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 370px;
+    height: 450px;
+    background: linear-gradient(60deg,transparent,green,green);
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+}
+
+.container-mregister::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 370px;
+    height: 450px;
+    background: linear-gradient(60deg,transparent,green,green);
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+}
+
+
+
+.container-mlogin::after{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 370px;
+    height: 450px;
+    background: linear-gradient(60deg,transparent,rgb(74, 237, 3),rgb(74, 237, 3));
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+}
+
+.container-mregister::after{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 370px;
+    height: 450px;
+    background: linear-gradient(60deg,transparent,rgb(74, 237, 3),rgb(74, 237, 3));
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+
+}
+
+form{
+    position: absolute;
+    inset: 2px;
+    border-radius: 50px 5px;
+    background:#23242a;
+    z-index: 10;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    color: rgb(76, 235, 76);
+    font-size: 35px;
+    font-weight: 500;
     text-align: center;
 }
 
-.container-mregister{
-    font-size: 36px;
-    text-align: center;
+.input-box{
+    position: relative;
+    width: 300px;
+    margin-top: 35px;
 }
 
-.container-mregister .input-box{
-    width: 100%;
-    height: 50px;
-    margin: 30px 0;
-}
-
-.container-mlogin .input-box{
-    width: 100%;
-    height: 50px;
-    margin: 30px 0;
-}
 .input-box input{
+    position: relative;
     width: 100%;
-    height: 100%;
+    padding: 20px 10px 10px;
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(0, 0, 0, 0.447);
-    border-radius: 40px;
-    font-size: 16px;
-    color: black;
-    padding: 20px 45px 20px 20px;
+    color: #4fef15;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    z-index: 10;
 }
 
-.input-box input::placeholder{
-    color: black;
-}
-
-.container-mlogin .button{
-    width: 100%;
-    height: 45px;
-    background: black;
+input[type="submit"]{
+    font-size: 20px;
     border: none;
     outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: 16px;
-    color: whitesmoke;
+    background: rgb(58, 207, 9);
+    padding: 5px;
+    margin-top: 40px;
+    border-radius: 90px;
     font-weight: 600;
-}
-.container-mregister .button{
+    cursor: pointer;
     width: 100%;
-    height: 45px;
-    background: black;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: 16px;
-    color: whitesmoke;
-    font-weight: 600;
 }
 
-.container-mlogin .regtext{
-    font-size: 14.5px;
-    text-align: center;
-    margin: 20px 0 15px;
+input[type="submit"]:active{
+    background: linear-gradient(90deg,green,yellowgreen);
+    opacity: 0.8;
 }
 
-.container-mregister .regtext{
-    font-size: 18px;
-    text-align: center;
-    margin: 20px 0 15px;
+.input-box span{
+    position: absolute;
+    left: 0;
+    padding: 20px 10px 10px;
+    font-size: 1em;
+    color: rgba(24, 23, 23, 0.164);
+    pointer-events: none;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+}
+
+.input-box input:valid ~ span,
+.input-box input:focus ~ span
+{
+    color: green;
+    transform: translateX(-10px) translateY(-30px);
+    font-size: 0.75em;
+}
+
+/*
+.input-box i{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: green;
+    border-radius: 4px;
+    transition: 0.5s;
+    pointer-events: none;
+    z-index: 9;
+}
+
+.input-box input:valid ~ i,
+.input-box input:focus ~ i
+{
+    height: 44px;
+}
+*/
+.regtext{
+    display: flex;
+    justify-content: center;
 }
 
 .regtext a{
-    color: #fff;
+    margin: 25px 0;
+    font-size: 1em;
+    color: black;
     text-decoration: none;
-    font-weight: 600;
+
+}
+.regtext a:hover,
+.regtext a:nth-child(1){
+    color: green;
 }
 
-.regtext p a:hover{
-    text-decoration: underline;
+.regtext a:nth-child(1):hover{
+    text-decoration: underline 2px;
+    text-underline-offset: 5px;
 }
 
-footer{
-    font-size: 17.5px;
-}
+
 

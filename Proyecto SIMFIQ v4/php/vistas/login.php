@@ -11,12 +11,15 @@
 <body>
 <div class="container-mlogin">
     <div id="login">
-        <h1>Autenticacion de usuario</h1>
+        
         <form name="loginform" id="loginform" action="" method="POST">
+        <h1>Autenticacion de usuario</h1>
             <p>
                 
                 <div class="input-box">
                 <input type="text" placeholder="@Usuario" name="username" id="username" class="input" value="" size="20" />
+                <span>Username</span>
+                <i></i>
                 </div>
             </p>
 
@@ -25,6 +28,8 @@
                 
                 <div class="input-box">
                 <input type="password" placeholder="@Password" name="password" id="password" class="input" value="" size="20" />
+                <span>Enter Password</span>
+                <i></i>
                 </div>    
             </p>
 
@@ -32,9 +37,12 @@
                 <p class="submit">
                     <input type="submit" name="login" class="button" value="Conectar" />
                 </p>
-            </p>
-                <p class="regtext">No estas registrado? <a href="index.php?vista=register" >Registrate aqui</a>!
-            </p>
+                <center>
+            <div class="regtext">
+                 <a href="index.php?vista=register">Registrate aqui</a>
+                 </div>
+                 </center>
+            
 
         </form>
     </div>
