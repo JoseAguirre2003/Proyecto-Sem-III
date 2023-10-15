@@ -8,16 +8,16 @@ if ($_SESSION["s_usuario"] === null){
     include "./inc/htmlOpen.php";
 
     
-    if(isset($_SESSION['s_idRol']))
-        if($_SESSION['s_idRol'] == 1){
-            $rol = "Admin";
-            include "./inc/headerAndNavAdmin.php";
-        }else{
-            $rol = "Usuario";
-            include "./inc/headerAndNav.php";
-        }
-    else
-        header("./logout.php");
+    // if(isset($_SESSION['s_idRol']))
+    //     if($_SESSION['s_idRol'] == 1){
+    //         $rol = "Admin";
+    //         include "./inc/headerAndNavAdmin.php";
+    //     }else{
+    //         $rol = "Usuario";
+    //         include "./inc/headerAndNav.php";
+    //     }
+    // else
+    //     header("./logout.php");
 ?>
     <section class="container">
         <header>Ingreso de datos de Muestra:</header>
@@ -79,7 +79,6 @@ if ($_SESSION["s_usuario"] === null){
                 echo "No se ha podido guardar la muestra<br>";
             }else{
                 echo "Se ha logrado guardar<br>";
-                var_dump($IDMuestra);
                 $muestraAP = new MAaProcesar;
                 $contMuestras = 0;
                 foreach($_POST['muestraAP'] as $map){
@@ -91,7 +90,7 @@ if ($_SESSION["s_usuario"] === null){
                     if($muestraAP->guardarMuestraAProcesar())
                         $contMuestras++;
                 }
-                echo "Se han guardado $contMuestras";
+                echo "Se han guardado $contMuestras meustras a procesar";
                 unset($muestra);
             }
         }

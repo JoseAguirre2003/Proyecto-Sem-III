@@ -25,8 +25,10 @@ if ($_SESSION["s_usuario"] === null){
             include_once "./php/func.php";
             include "./php/clases/Productor.php";
             include "./php/clases/MuestraAgua.php";
+            include "./php/clases/MuestraSuelo.php";
             $productor = new Prodcutor;
             $muestra = new MuestraAgua;
+            $muestraS = new MuestraSuelo;
 
             if(isset($_POST['eliminar']) && (isset($_GET['idElim']) && is_numeric($_GET['idElim']))){
                 if($muestra->eliminarMuestra($_GET['idElim']))
@@ -95,26 +97,11 @@ if ($_SESSION["s_usuario"] === null){
                     if(!$muestras)
                         echo "No se han encontrado muestras";
                     else{
-                        // echo '
-                        //     <table id="resultado">
-                        //         <tbody>
-                        //             <tr>
-                        //                 <th colspan="6">Muestras:</th>
-                        //             </tr>
-                        //             <tr>
-                        //                 <th>ID</th>
-                        //                 <th>Fecha de Ingreso</th>
-                        //                 <th>Fuente de Agua</th>
-                        //                 <th>Recolectada por</th>
-                        //                 <th colspan="2">Opciones</th>
-                        //             </tr>
-                                
-                        // ';
                         echo '
                             <table id="resultado">
                                 <tbody>
                                     <tr>
-                                        <th colspan="6">Muestras:</th>
+                                        <th colspan="6">Muestras de Agua:</th>
                                     </tr>
                                     <tr>
                                         <th>ID</th>
@@ -126,16 +113,6 @@ if ($_SESSION["s_usuario"] === null){
                         ';
 
                         foreach($muestras as $row){
-                            // echo '
-                            //     <tr>
-                            //         <td><a href="../VerMuestras/verMuestras.php?buscar='.$row['ID_Muestra'].'">'.$row['ID_Muestra'].'</a></td>
-                            //         <td>'.$row['Fecha_Ingreso'].'</td>
-                            //         <td>'.$row['Fuente_Agua'].'</td>
-                            //         <td>'.$row['Recolectada_Por'].'</td>
-                            //         <td>*Editar*</td>
-                            //         <td>*Eliminar*</td>
-                            //     </tr>
-                            // ';
                             echo '
                                 <tr>
                                     <td><a href="./verMuestras.php?buscar='.$row['ID_Muestra'].'">'.$row['ID_Muestra'].'</a></td>
