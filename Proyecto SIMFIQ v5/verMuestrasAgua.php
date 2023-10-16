@@ -102,7 +102,7 @@ if ($_SESSION["s_usuario"] === null){
                             <input type="submit" name="eliminar" value="Eliminar" class="boton">
                         </form>
                     ';
-            $muestrasAProcesar = $muestrasAProcesar->listarMuestrasAProcrsar($_GET['buscar']);
+            $muestrasAProcesar = $muestrasAProcesar->listarMuestrasAProcrsarAgua($_GET['buscar']);
             if (!$muestrasAProcesar)
                 echo "No se han encontrado muestras a procesar";
             else {

@@ -82,15 +82,18 @@ if ($_SESSION["s_usuario"] === null){
                 $muestraAP = new MAaProcesar;
                 $contMuestras = 0;
                 foreach($_POST['muestraAP'] as $map){
-                    $muestraAP->setIdMuestra($IDMuestra);
                     $muestraAP->setIdentificador($map['identificar']);
                     $muestraAP->setAnalisisARealizar($map['analisisARealizar']);
                     $muestraAP->setFechaDeToma($map['fechaDeToma']);
                     $muestraAP->setObservaciones($map['observaciones']);
-                    if($muestraAP->guardarMuestraAProcesar())
+                    if($muestraAP->guardarMuestraAProcesar_Agua($IDMuestra))
                         $contMuestras++;
                 }
-                echo "Se han guardado $contMuestras meustras a procesar";
+                if($contMuestras == 0){
+                    echo "No se ha podido guardar la muestra<br>";
+                    $muestra->eliminarMuestra($IDMuestra);
+                }else
+                    echo "Se han guardado $contMuestras meustras a procesar";
                 unset($muestra);
             }
         }
@@ -186,7 +189,12 @@ if ($_SESSION["s_usuario"] === null){
                                 </div>
                                 <div class="imput-box">
                                     <label for="analisisARealizar">Analisis a realizar:</label>
-                                    <input type="text" placeholder="Analisis a realizar" name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
+                                    <select name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
+                                        <option value="pH">pH</option>
+                                        <option value="Conductividad">Conductividad</option>
+                                        <option value="particulasFlotantes">Particulas Flotantes</option>
+                                        <option value="Todo">Todo</option>
+                                    </select>
                                 </div>
                                 <div class="imput-box">
                                     <label for="fechaDeToma">Fecha de toma:</label><br>

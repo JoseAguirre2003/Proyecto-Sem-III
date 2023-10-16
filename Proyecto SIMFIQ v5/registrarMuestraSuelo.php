@@ -6,18 +6,17 @@ if ($_SESSION["s_usuario"] === null){
 }
 
     include "./inc/htmlOpen.php";
-
     
-//     if(isset($_SESSION['s_idRol']))
-//         if($_SESSION['s_idRol'] == 1){
-//             $rol = "Admin";
-//             include "./inc/headerAndNavAdmin.php";
-//         }else{
-//             $rol = "Usuario";
-//             include "./inc/headerAndNav.php";
-//         }
-//     else
-//         header("./logout.php");
+    if(isset($_SESSION['s_idRol']))
+        if($_SESSION['s_idRol'] == 1){
+            $rol = "Admin";
+            include "./inc/headerAndNavAdmin.php";
+        }else{
+            $rol = "Usuario";
+            include "./inc/headerAndNav.php";
+        }
+    else
+        header("./logout.php");
 ?>
 <section>
     <header>Ingreso de datos de Muestra:</header>

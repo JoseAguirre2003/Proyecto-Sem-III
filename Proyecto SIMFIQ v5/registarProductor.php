@@ -7,7 +7,6 @@ if ($_SESSION["s_usuario"] === null){
 
     include "./inc/htmlOpen.php";
 
-    
     if(isset($_SESSION['s_idRol']))
         if($_SESSION['s_idRol'] == 1){
             $rol = "Admin";
@@ -24,11 +23,11 @@ if ($_SESSION["s_usuario"] === null){
             <header>Ingreso de datos de Productor:</header>
             <?php 
                 
-                include_once "./php/func.php";
+                include "./php/func.php";
                 include "./php/clases/Productor.php";
 
                 if(isset($_GET['id']) && is_numeric($_GET['id'])){
-                    $productor = new Prodcutor;
+                    $productor = new Productor;
                     $productor = $productor->buscarProductor($_GET['id']);
                     echo "ID del prodcutor Productor a cambiar: ".$productor['ID_Productor'];
                     if(!$productor)
@@ -37,7 +36,7 @@ if ($_SESSION["s_usuario"] === null){
                     unset($_GET['id']);
 
                 if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0 && isset($_POST['actualizar'])){
-                    $productor = new Prodcutor;
+                    $productor = new Productor;
                     $productor->setNombre(limpiarCadena($_POST['nombre']));
                     $productor->setCiRIF(limpiarCadena($_POST['cedulaRIF']));
                     $productor->setDireccion(limpiarCadena($_POST['direccion']));
@@ -47,17 +46,17 @@ if ($_SESSION["s_usuario"] === null){
                     $productor->setTraidoPor(limpiarCadena($_POST['traidoPor']));
                     $productor->setCorreo(limpiarCadena($_POST['correo']));
                     $productor->setAsesorTecnico(limpiarCadena($_POST['asesorTecnico']));
-                    $productor = $productor->actualizarProdcutor($_GET['id']);
+                    $productor = $productor->actualizarProductor($_GET['id']);
                     if($productor){
                         echo "<br>ACTUALIZADO CON EXITO";
-                        $productor = new Prodcutor();
+                        $productor = new Productor;
                         $productor = $productor->buscarProductor($_GET['id']);
                     }else{
                         echo "<br>NO SE PUDO ACTUALIZAR";
                         unset($productor);
                     }
                 }else if(isset($_POST['guardar']) && isset($_POST['nombre']) && isset($_POST['cedulaRIF']) && isset($_POST['direccion']) && isset($_POST['contacto'])){
-                    $productor = new Prodcutor;
+                    $productor = new Productor;
                     $productor->setNombre(limpiarCadena($_POST['nombre']));
                     $productor->setCiRIF(limpiarCadena($_POST['cedulaRIF']));
                     $productor->setDireccion(limpiarCadena($_POST['direccion']));

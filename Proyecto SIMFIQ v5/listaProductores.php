@@ -31,7 +31,7 @@ if ($_SESSION["s_usuario"] === null){
     <?php
         include "./php/func.php";
         include "./php/clases/Productor.php";
-        $productores = new Prodcutor;
+        $productores = new Productor;
 
         if(isset($_POST['eliminar']) && (isset($_GET['idElim']) && is_numeric($_GET['idElim']))){
             if($productores->eliminarProductor($_GET['idElim']))

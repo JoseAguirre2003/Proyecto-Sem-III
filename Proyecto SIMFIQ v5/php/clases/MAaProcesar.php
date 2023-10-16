@@ -1,21 +1,10 @@
 <?php 
 
     class MAaProcesar{
-
-        private $idMuestra;
         private $identificador;
         private $analisisARealizar;
         private $fechaDeToma;
         private $observaciones;
-
-        public function getIdMuestra(){
-            return $this->idMuestra;
-        }
-        
-        public function setIdMuestra($idMuestra){
-            $this->idMuestra = $idMuestra;
-            return $this;
-        }
         
         public function getIdentificador(){
             return $this->identificador;
@@ -53,12 +42,15 @@
             return $this;
         }
 
-        public function guardarMuestraAProcesar(){
-            $peticion = conexion();
-            $peticion = $peticion->prepare("INSERT INTO `muestra_a_procesar` (`IDMuestra`, `Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`)
-                                            VALUES ('".$this->idMuestra."', '".$this->identificador."', '".$this->analisisARealizar."', '".$this->fechaDeToma."', '".$this->observaciones."');");
+        public function guardarMuestraAProcesar_Agua($IDMuestra){
+            $conexion = conexion();
+            $peticion = $conexion->prepare("INSERT INTO `muestra_a_procesar` (`Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`)
+                                            VALUES ('".$this->identificador."', '".$this->analisisARealizar."', '".$this->fechaDeToma."', '".$this->observaciones."');");
             $peticion->execute();
             if($peticion->rowCount() == 1){
+                $peticion = $conexion;
+                $idMuesAP = $peticion->query("SELECT LAST_INSERT_ID()")->fetch()[0];
+                $peticion->query("INSERT INTO `maguaxmap` (`IDMuestraAgua`, `IDMuestraAProcesar`) VALUES ('".$IDMuestra."', '".$idMuesAP."')");
                 $peticion = null;
                 return true;
             }else{
@@ -102,9 +94,9 @@
             }
         }
 
-        public function listarMuestrasAProcrsar($id){
+        public function listarMuestrasAProcrsarAgua($id){
             $peticion = conexion();
-            $peticion = $peticion->prepare("SELECT * FROM `muestra_a_procesar` WHERE `IDMuestra` = '$id';");
+            $peticion = $peticion->prepare("SELECT muestra_a_procesar.* FROM muestra_a_procesar INNER JOIN maguaxmap ON muestra_a_procesar.IDMuestra_A_Procesar = maguaxmap.IDMuestraAProcesar WHERE maguaxmap.IDMuestraAgua = ".$id." ORDER BY muestra_a_procesar.IDMuestra_A_Procesar ASC;");
             $peticion->execute();
             $array = $peticion->fetchAll();
             $peticion = null;
