@@ -43,7 +43,6 @@ if ($_SESSION["s_usuario"] === null){
             $muestra->setTraidoPor($_POST['traidoPor']);
             $muestra->setProfundidad($_POST['profundidad']);
             $muestra->setUsoAnterior($_POST['usoAnterior']);
-            $muestra->setAnalisisARealizar($_POST['analisisARealizar']);
             $muestra->setHectaria($_POST['hectaria']);
             if($muestra->actualizarMuestra($_GET['id'])){
                 echo "<br>ACTUALIZADO CON EXITO :)";
@@ -67,7 +66,7 @@ if ($_SESSION["s_usuario"] === null){
                 echo "No se ha podido guardar la muestra<br>";
                 unset($muestra);
             }else{
-                echo "Se ha guardado con exito";
+                echo "Se ha guardado con exito<br>";
                 $muestraAP = new MAaProcesar;
                 $contMuestras = 0;
                 foreach($_POST['muestraAP'] as $map){
@@ -82,7 +81,7 @@ if ($_SESSION["s_usuario"] === null){
                     echo "No se ha podido guardar la muestra<br>";
                     $muestra->eliminarMuestra($IDMuestra);
                 }else
-                    echo "Se han guardado $contMuestras meustras a procesar";
+                    echo "Se han guardado $contMuestras meustras a procesar<br>";
                 unset($muestra);
             }
         }

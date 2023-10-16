@@ -119,6 +119,15 @@
             $peticion = null;
             return $array;
         }
+
+        public function listarMuestrasAProcrsarSuelo($id){
+            $peticion = conexion();
+            $peticion = $peticion->prepare("SELECT muestra_a_procesar.* FROM muestra_a_procesar INNER JOIN msueloxmap ON muestra_a_procesar.IDMuestra_A_Procesar = msueloxmap.IDMuestraAProcesar WHERE msueloxmap.IDMuestraSuelo = ".$id." ORDER BY muestra_a_procesar.IDMuestra_A_Procesar ASC;");
+            $peticion->execute();
+            $array = $peticion->fetchAll();
+            $peticion = null;
+            return $array;
+        }
         
     }
 

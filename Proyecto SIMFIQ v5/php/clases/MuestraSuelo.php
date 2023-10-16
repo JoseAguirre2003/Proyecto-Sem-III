@@ -139,7 +139,7 @@ class MuestraSuelo{
 
 	public function listarMuestras($id){
 		$peticion = conexion();
-		$peticion = $peticion->prepare("SELECT * FROM `muestra_suelo` WHERE `IDMuestraSuelo` = '$id';");
+		$peticion = $peticion->prepare("SELECT * FROM `muestra_suelo` WHERE `IDProductor` = '$id';");
 		$peticion->execute();
 		$array = $peticion->fetchAll();
 		$peticion = null;

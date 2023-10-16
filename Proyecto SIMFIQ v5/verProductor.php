@@ -27,14 +27,23 @@ if ($_SESSION["s_usuario"] === null){
             include_once "./php/func.php";
             include "./php/clases/Productor.php";
             include "./php/clases/MuestraAgua.php";
+            include "./php/clases/MuestraSuelo.php";
             $productor = new Productor;
-            $muestra = new MuestraAgua;
 
-            if(isset($_POST['eliminar']) && (isset($_GET['idElim']) && is_numeric($_GET['idElim']))){
+            if(isset($_POST['eliminarAgua']) && (isset($_GET['idElim']) && is_numeric($_GET['idElim']))){
+                $muestra = new MuestraAgua;
                 if($muestra->eliminarMuestra($_GET['idElim']))
-                    echo "Sea Eliminado la muestra de ID: ".$_GET['idElim'];
+                    echo "Sea Eliminado la muestra de agua de ID: ".$_GET['idElim'];
                 else
-                    echo "No pudo elimiar la muestra de ID: ".$_GET['idElim'];
+                    echo "No pudo elimiar la muestra de agua de ID: ".$_GET['idElim'];
+            }
+
+            if(isset($_POST['eliminarSuelo']) && (isset($_GET['idElim']) && is_numeric($_GET['idElim']))){
+                $muestra = new MuestraSuelo;
+                if($muestra->eliminarMuestra($_GET['idElim']))
+                    echo "Sea Eliminado la muestra de suelo de ID: ".$_GET['idElim'];
+                else
+                    echo "No pudo elimiar la muestra de suelo de ID: ".$_GET['idElim'];
             }
 
             if(isset($_GET['buscar']) && is_numeric($_GET['buscar'])) {
@@ -93,15 +102,16 @@ if ($_SESSION["s_usuario"] === null){
                     ';
                         //ESOS BOTONES DE ELIMINAR Y EDITAR HAY QUE PONERLOS DE MANERA MA OPTIMA, NO SE ESTA MUY FEO ASI
                     
+                    $muestra = new MuestraAgua;
                     $muestras = $muestra->listarMuestras($productor['ID_Productor']);
                     if(!$muestras)
-                        echo "No se han encontrado muestras";
+                        echo "No se han encontrado muestras de Agua<br>";
                     else{
                         echo '
                             <table id="resultado">
                                 <tbody>
                                     <tr>
-                                        <th colspan="6">Muestras:</th>
+                                        <th colspan="6">Muestras de Agua:</th>
                                     </tr>
                                     <tr>
                                         <th>ID</th>
@@ -122,15 +132,52 @@ if ($_SESSION["s_usuario"] === null){
                                 </tr>
                             ';
                         }
+                        
                     }
+
+                    $muestra = new MuestraSuelo;
+                    $muestras = $muestra->listarMuestras($productor['ID_Productor']);
+                    if(!$muestras)
+                        echo "No se han encontrado muestras de suelo<br>";
+                    else{
+                        echo '
+                            <table id="resultado">
+                                <tbody>
+                                    <tr>
+                                        <th colspan="6">Muestras de Suelo:</th>
+                                    </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Fecha de Recepcion</th>
+                                        <th>Uso Anterior</th>
+                                        <th>Traido por</th>
+                                    </tr>
+                                
+                        ';
+
+                        foreach($muestras as $row){
+                            echo '
+                                <tr>
+                                    <td><a href="./verMuestrSuelo.php?buscar='.$row['IDMuestraSuelo'].'">'.$row['IDMuestraSuelo'].'</a></td>
+                                    <td>'.$row['Fecha_Recepcion'].'</td>
+                                    <td>'.$row['Uso_Anterior'].'</td>
+                                    <td>'.$row['Traido_Por'].'</td>
+                                </tr>
+                            ';
+                        }
+                        
+                    }
+
+                    echo '</tbody>
+                        </table>
+                    ';
                 }
             }
         ?>
 
-    </section>
-      </main>
-        </section>
-
+    
+    </main>
+</section>
 <?php 
     include "./inc/htmlClose.php";
 ?>
