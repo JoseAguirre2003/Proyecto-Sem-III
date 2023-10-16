@@ -53,12 +53,47 @@ class Usuario{
 		return $this;
 	}
 
+	public function camiarRol($id){
+		$conexion = conexion();
+		$peticion = $conexion->prepare("SELECT idRol FROM `users` WHERE `id` = ".$id.";");
+		$peticion->execute();
+		$rol = $peticion->fetch()[0];
+		if($rol == 1){
+			if($conexion->query("UPDATE `users` SET `idRol` = '0' WHERE `users`.`id` = $id ")){
+				$peticion = null;
+				$conexion = null;
+				return true;
+			}
+			return false;
+		}else{
+			if($conexion->query("UPDATE `users` SET `idRol` = '1' WHERE `users`.`id` = $id ")){
+				$peticion = null;
+				$conexion = null;
+				return true;
+			}
+			return false;
+		}
+	}
+
+	public function eliminarUser($id){
+		$peticion = conexion();
+		$peticion = $peticion->prepare("DELETE FROM `users` WHERE `id` = ".$id.";");
+		$peticion->execute();
+		if($peticion->rowCount() > 0){
+			$peticion = null;
+			return true;
+		}else {
+			$peticion = null;
+			return false;
+		}
+	}
+
     public function listarUsuarios($busqueda){
         
         if(isset($busqueda) && $busqueda != "")
-            $consultaDatos = "SELECT * FROM users WHERE id LIKE '$busqueda' OR fullname LIKE '%$busqueda%' OR email LIKE '%$busqueda%' OR username LIKE '%$busqueda%';";
+            $consultaDatos = "SELECT * FROM users WHERE id != ".$_SESSION["s_id"]." AND (fullname LIKE '%$busqueda%' OR email LIKE '%$busqueda%' OR username LIKE '%$busqueda%');";
         else
-            $consultaDatos = "SELECT * FROM users;"; 
+            $consultaDatos = "SELECT * FROM users WHERE id != ".$_SESSION["s_id"].";"; 
 
         $conexion = conexion();
 

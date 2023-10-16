@@ -29,8 +29,21 @@ if ($_SESSION["s_usuario"] === null){
     <?php
         include "./php/func.php";
         include "./php/clases/user.php";
+        
         $usuarios = new Usuario;
         $busqueda = (isset($_GET['busqueda'])) ? limpiarCadena($_GET['busqueda']) : "";
+
+        if(isset($_GET['idRolUpdate']) && $_GET['idRolUpdate'])
+            if($usuarios->camiarRol($_GET['idRolUpdate']))
+                echo "Se ha cambiado el rol del usuario ". $_GET['idRolUpdate'];
+            else
+                echo "No se ha podido cambiar el rol";
+
+        if(isset($_GET['idElim']) && $_GET['idElim'] > 0)
+            if($usuarios->eliminarUser($_GET['idElim']))
+                echo "Usuario de ID ".$_GET['idElim']." ha sido eliminado";
+            else
+                echo "El usuario no pudo ser elimindo";
 
         $usuarios = $usuarios->listarUsuarios($busqueda);
         if (!$usuarios){
@@ -75,6 +88,10 @@ if ($_SESSION["s_usuario"] === null){
                 echo '<td><a href="./adminCtrlUserList.php?idElim='.$usuario['id'].'">Banear</a></td>
                 </tr>';
             }
+            echo '
+                </tbody>
+            </table>
+            ';
         }
     ?>
     </section>
