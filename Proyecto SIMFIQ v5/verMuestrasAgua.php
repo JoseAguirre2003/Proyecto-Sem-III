@@ -6,7 +6,6 @@ if ($_SESSION["s_usuario"] === null){
 }
 
     include "./inc/htmlOpen.php";
-
     
     if(isset($_SESSION['s_idRol']))
         if($_SESSION['s_idRol'] == 1){

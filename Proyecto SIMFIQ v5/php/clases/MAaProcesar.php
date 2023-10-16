@@ -59,6 +59,23 @@
             }
         }
 
+        public function guardarMuestraAProcesar_Suelo($IDMuestra){
+            $conexion = conexion();
+            $peticion = $conexion->prepare("INSERT INTO `muestra_a_procesar` (`Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`)
+                                            VALUES ('".$this->identificador."', '".$this->analisisARealizar."', '".$this->fechaDeToma."', '".$this->observaciones."');");
+            $peticion->execute();
+            if($peticion->rowCount() == 1){
+                $peticion = $conexion;
+                $idMuesAP = $peticion->query("SELECT LAST_INSERT_ID()")->fetch()[0];
+                $peticion->query("INSERT INTO `msueloxmap` (`IDMuestraSuelo`, `IDMuestraAProcesar`) VALUES ('".$IDMuestra."', '".$idMuesAP."')");
+                $peticion = null;
+                return true;
+            }else{
+                $peticion = null;
+                return false;
+            }
+        }
+
         public function buscarMuestraAProcesar($id){
             $peticion = conexion();
             $peticion = $peticion->prepare("SELECT * FROM `muestra_a_procesar` WHERE `IDMuestra_A_Procesar` = '$id';");

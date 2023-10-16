@@ -77,6 +77,7 @@ if ($_SESSION["s_usuario"] === null){
             $IDMuestra = $muestra->guardarMuestra();
             if(!$IDMuestra){
                 echo "No se ha podido guardar la muestra<br>";
+                unset($muestra);
             }else{
                 echo "Se ha logrado guardar<br>";
                 $muestraAP = new MAaProcesar;

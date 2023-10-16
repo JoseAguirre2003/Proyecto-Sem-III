@@ -9,7 +9,6 @@ class MuestraSuelo{
     private $traidoPor;
     private $profundidad;
     private $usoAnterior;
-    private $AnalisisARealizar;
     private $hectaria;
 
 	public function getIdProductor() {
@@ -75,10 +74,6 @@ class MuestraSuelo{
 		return $this;
 	}
 
-	public function getAnalisisARealizar() {
-		return $this->AnalisisARealizar;
-	}
-
 	public function setAnalisisARealizar($AnalisisARealizar){
 		$this->AnalisisARealizar = $AnalisisARealizar;
 		return $this;
@@ -95,8 +90,8 @@ class MuestraSuelo{
 
 	public function guardarMuestra(){
 		$conexion = conexion();
-		$peticion = $conexion->prepare("INSERT INTO `muestra_suelo` (`IDProductor`, `Fecha_Recepcion`, `Localidad`, `Municipio`, `Traido_Por`, `Profundidad`, `Uso_Anterior`, `Analisis_A_Realizar`, `Hectaria`) 
-										VALUES ('".$this->idProductor."', '".$this->fechaRecepcion."', '".$this->localidad."', '".$this->municipio."', '".$this->traidoPor."', '".$this->profundidad."', '".$this->usoAnterior."', '".$this->AnalisisARealizar."', '".$this->hectaria."');");
+		$peticion = $conexion->prepare("INSERT INTO `muestra_suelo` (`IDProductor`, `Fecha_Recepcion`, `Localidad`, `Municipio`, `Traido_Por`, `Profundidad`, `Uso_Anterior`, `Hectaria`) 
+										VALUES ('".$this->idProductor."', '".$this->fechaRecepcion."', '".$this->localidad."', '".$this->municipio."', '".$this->traidoPor."', '".$this->profundidad."', '".$this->usoAnterior."', '".$this->hectaria."');");
 		$peticion->execute();
 		if($peticion->rowCount() == 1){
 			$peticion = $conexion;
@@ -118,7 +113,7 @@ class MuestraSuelo{
 
 	public function actualizarMuestra($id){
 		$peticion = conexion();
-		$peticion = $peticion->prepare("UPDATE `muestra_suelo` SET `Fecha_Recepcion` = '".$this->fechaRecepcion."', `Localidad` = '".$this->localidad."', `Municipio` = '".$this->municipio."', `Traido_Por` = '".$this->traidoPor."', `Profundidad` = '".$this->profundidad."', `Uso_Anterior` = '".$this->usoAnterior."', `Analisis_A_Realizar` = '".$this->AnalisisARealizar."', `Hectaria` = '".$this->hectaria."' WHERE `IDMuestraSuelo` = ".$id.";");
+		$peticion = $peticion->prepare("UPDATE `muestra_suelo` SET `Fecha_Recepcion` = '".$this->fechaRecepcion."', `Localidad` = '".$this->localidad."', `Municipio` = '".$this->municipio."', `Traido_Por` = '".$this->traidoPor."', `Profundidad` = '".$this->profundidad."', `Uso_Anterior` = '".$this->usoAnterior."', `Hectaria` = '".$this->hectaria."' WHERE `IDMuestraSuelo` = ".$id.";");
 		$peticion->execute();
 		if($peticion->rowCount() == 1){
 			$peticion = null;
