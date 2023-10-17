@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+
+body{
+    /* height: 100vh; */
+    background-color: #000;
+    background-image: url(https://images.unsplash.com/photo-1433185000771-ec45c869c61b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background:rgba(255, 255, 255, .2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 255, 255, .3);
+    z-index: 100;
+}
+
+.header::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent,rgba(66, 222, 14, 0.4),transparent);
+    transition: .5s;
+}
+.header:hover::before{
+    left: 100%;
+}
+
+.logo{
+    color: black;
+    font-size: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: default;
+}
+
+.navbar a{
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    margin-left: 35px;
+    transition: .3s;
+}
+
+.navbar a:hover{
+    color: rgb(10, 241, 10);
+}
+
+.navbar a::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #000000;
+    transition: .3s;
+}
+
+.navbar a:hover::before{
+    width: 100%;
+}
+
+.container{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 15;
+    left: 125px;
+    top: 50;
+}
+table{
+    width: 100%;
+}
+
+table, th, td{
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+main.table{
+    width: 82vw;
+    height: 80vh;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0.4rem .8rem #0005;
+    border-radius: .8rem;
+    overflow: hidden;
+    
+}
+
+main form{
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+}
+
+.table_body{
+    width: 95%;
+    max-height: calc(89% - .8rem);
+    background-color: #fffb;
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+    overflow: auto;
+}
+
+.table_body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.table_body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+.table_body:hover::-webkit-scrollbar-thumb{
+    visibility: visible;
+}
+
+thead th{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+}
+
+tbody tr:nth-child(even){
+    background-color: #0000000b;
+}
+
+tbody tr:hover{
+    background-color: rgb(56, 229, 77);
+}
+
+@media (max-width:1000px){
+    td:not(:first-of-type){
+        min-width: 12.1rem;
+    }
+}
+
+.sub-body{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    
+}
+
+.sub-body2{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    
+}
+
+.sub-body3{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 32%;
+    width: 100%;
+}
+
+
+
+body::-webkit-scrollbar{
+    width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track{
+    background: #1e1e1e;
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color: rgb(56, 229, 77);
+}
+
+.sub-container{
+    width: 100%;
+    max-width: 700px;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0.4rem .8rem #0005;
+    padding: 28px;
+    margin: 0 28px;
+    border-radius: 10px;
+  
+}
+
+.sub-container2{
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0.4rem .8rem #0005;
+    padding: 28px;
+    margin: 0 28px;
+    border-radius: 10px;
+  
+}
+
+
+
+.form-tittle{
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 6px;
+    color: black;
+    text-shadow: 2px 2px 2px white;
+    border-bottom: solid 1px black;
+}
+
+.main-user-info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 0;
+    
+}
+
+.main-user-info2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 0;
+    
+}
+
+
+
+.imput-box:nth-child(2n){
+    justify-content: end;
+    
+}
+
+.imput-box{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    padding-bottom: 15px;
+}
+
+.imput-box label{
+    width: 95%;
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 5px 0;
+}
+
+.imput-box input{
+    height: 40px;
+    width: 95%;
+    border-radius: 7px;
+    outline: none;
+    border: 1px solid grey;
+    padding: 0 10px;
+}
+
+.button{
+    cursor: pointer;
+    margin-top: 40px;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    color:white;
+    background:rgb(56, 229, 77) ;
+}
+
+.button:hover{
+    background: #37ff00;
+    color: rgb(255, 255, 255);
+}
+
+@media(max-width:600px){
+    .sub-container{
+        min-width: 280px;
+    }
+
+    .imput-box{
+        margin-bottom: 12px;
+        width: 100%;
+    }
+
+    .imput-box:nth-child(2n){
+        justify-content: space-between;
+    }
+
+    .main-user-info{
+        max-height: 380px;
+        overflow: auto;
+    }
+
+    .main-user-info::-webkit-scrollbar{
+        width: 0;
+    }
+}
+
+.mini-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 0;
+    width: 50%;
+
+}
+
+.comment-box{
+    position: absolute;
+    right: 10%;
+    
+}
+
+textarea.obs{
+ resize: none;
+ min-height: 150px;
+ min-width: 400px;
+ overflow: auto;
+ 
+}
+
