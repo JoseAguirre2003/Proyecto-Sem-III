@@ -7,19 +7,20 @@ if ($_SESSION["s_usuario"] === null){
 
     include "./inc/htmlOpen.php";
     
-    // if(isset($_SESSION['s_idRol']))
-    //     if($_SESSION['s_idRol'] == 1){
-    //         $rol = "Admin";
-    //         include "./inc/headerAndNavAdmin.php";
-    //     }else{
-    //         $rol = "Usuario";
-    //         include "./inc/headerAndNav.php";
-    //     }
-    // else
-    //     header("./logout.php");
+     if(isset($_SESSION['s_idRol']))
+         if($_SESSION['s_idRol'] == 1){
+             $rol = "Admin";
+             include "./inc/headerAndNavAdmin.php";
+         }else{
+             $rol = "Usuario";
+             include "./inc/headerAndNav.php";
+         }
+     else
+         header("./logout.php");
 ?>
-<section>
-    <header>Ingreso de datos de Muestra:</header>
+<section class="sub-body3">
+    <div class="sub-container2">
+    <header class="form-tittle">Ingreso de datos de Muestra de Suelo:</header>
     <?php
         include_once "./php/func.php";
         include "./php/clases/MuestraSuelo.php";
@@ -37,56 +38,70 @@ if ($_SESSION["s_usuario"] === null){
 
         if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0 && isset($_POST['actualizar'])){
             $muestra = new MuestraSuelo;
-            $muestra->setFechaRecepcion($_POST['fehaRecepcion']);
-            $muestra->setLocalidad($_POST['localidad']);
-            $muestra->setMunicipio($_POST['municipio']);
-            $muestra->setTraidoPor($_POST['traidoPor']);
-            $muestra->setProfundidad($_POST['profundidad']);
-            $muestra->setUsoAnterior($_POST['usoAnterior']);
-            $muestra->setHectaria($_POST['hectaria']);
-            if($muestra->actualizarMuestra($_GET['id'])){
-                echo "<br>ACTUALIZADO CON EXITO :)";
-                $muestra = $muestra->buscarMuestra($_GET['id']);
+            if(validarMuestraSuelo($_POST['fehaRecepcion'], $_POST['localidad'], $_POST['municipio'], $_POST['traidoPor'], $_POST['profundidad'], $_POST['usoAnterior'], $_POST['hectaria'])){
+                $muestra->setFechaRecepcion($_POST['fehaRecepcion']);
+                $muestra->setLocalidad($_POST['localidad']);
+                $muestra->setMunicipio($_POST['municipio']);
+                $muestra->setTraidoPor($_POST['traidoPor']);
+                $muestra->setProfundidad($_POST['profundidad']);
+                $muestra->setUsoAnterior($_POST['usoAnterior']);
+                $muestra->setHectaria($_POST['hectaria']);
+                if($muestra->actualizarMuestra($_GET['id'])){
+                    echo "<br>ACTUALIZADO CON EXITO :)";
+                    $muestra = $muestra->buscarMuestra($_GET['id']);
+                }else{
+                    echo "<br>NO SE PUDO ACTUALIZAR :(";
+                    unset($muestra);
+                }
             }else{
-                echo "<br>NO SE PUDO ACTUALIZAR :(";
+                echo "<br>NO SE PUDO ACTUALIZAR DATOS ERRADOS:(";
                 unset($muestra);
             }
+
         }else if(isset($_POST['idProductor'])){
             $muestra = new MuestraSuelo;
-            $muestra->setIdProductor($_POST['idProductor']);
-            $muestra->setFechaRecepcion($_POST['fehaRecepcion']);
-            $muestra->setLocalidad($_POST['localidad']);
-            $muestra->setMunicipio($_POST['municipio']);
-            $muestra->setTraidoPor($_POST['traidoPor']);
-            $muestra->setProfundidad($_POST['profundidad']);
-            $muestra->setUsoAnterior($_POST['usoAnterior']);
-            $muestra->setHectaria($_POST['hectaria']);
-            $IDMuestra = $muestra->guardarMuestra();
-            if(!$IDMuestra){
-                echo "No se ha podido guardar la muestra<br>";
-                unset($muestra);
-            }else{
-                echo "Se ha guardado con exito<br>";
-                $muestraAP = new MAaProcesar;
-                $contMuestras = 0;
-                foreach($_POST['muestraAP'] as $map){
-                    $muestraAP->setIdentificador($map['identificar']);
-                    $muestraAP->setAnalisisARealizar($map['analisisARealizar']);
-                    $muestraAP->setFechaDeToma($map['fechaDeToma']);
-                    $muestraAP->setObservaciones($map['observaciones']);
-                    if($muestraAP->guardarMuestraAProcesar_Suelo($IDMuestra))
-                        $contMuestras++;
-                }
-                if($contMuestras == 0){
+            if(is_numeric($_POST['idProductor']) && validarMuestraSuelo($_POST['fehaRecepcion'], $_POST['localidad'], $_POST['municipio'], $_POST['traidoPor'], $_POST['profundidad'], $_POST['usoAnterior'], $_POST['hectaria'])){
+                $muestra->setIdProductor($_POST['idProductor']);
+                $muestra->setFechaRecepcion($_POST['fehaRecepcion']);
+                $muestra->setLocalidad($_POST['localidad']);
+                $muestra->setMunicipio($_POST['municipio']);
+                $muestra->setTraidoPor($_POST['traidoPor']);
+                $muestra->setProfundidad($_POST['profundidad']);
+                $muestra->setUsoAnterior($_POST['usoAnterior']);
+                $muestra->setHectaria($_POST['hectaria']);
+                $IDMuestra = $muestra->guardarMuestra();
+                if(!$IDMuestra){
                     echo "No se ha podido guardar la muestra<br>";
-                    $muestra->eliminarMuestra($IDMuestra);
-                }else
-                    echo "Se han guardado $contMuestras meustras a procesar<br>";
+                    unset($muestra);
+                }else{
+                    echo "Se ha guardado con exito";
+                    $muestraAP = new MAaProcesar;
+                    $contMuestras = 0;
+                    foreach($_POST['muestraAP'] as $map){
+                        if(validarMuestrasAProcesar($map['identificar'], $map['analisisARealizar'], $map['fechaDeToma'], $map['observaciones'])){
+                            $muestraAP->setIdentificador($map['identificar']);
+                            $muestraAP->setAnalisisARealizar($map['analisisARealizar']);
+                            $muestraAP->setFechaDeToma($map['fechaDeToma']);
+                            $muestraAP->setObservaciones($map['observaciones']);
+                            if($muestraAP->guardarMuestraAProcesar_Suelo($IDMuestra))
+                                $contMuestras++;
+                        }
+                    }
+                    if($contMuestras == 0){
+                        echo "No se ha podido guardar la muestra<br>";
+                        $muestra->eliminarMuestra($IDMuestra);
+                    }else
+                        echo "Se han guardado $contMuestras meustras a procesar";
+                    unset($muestra);
+                }
+            }else{
+                echo "<br>NO SE PUDO GUARDAR, DATOS ERRADOS";
                 unset($muestra);
             }
         }
     ?>
     <form action="" method="POST" class="form">
+        <div class="main-user-info2">
             <div class="imput-box">
                 <label for="idProductor">ID Productor:</label>
                 <input type="text" placeholder="ID del prodcutor" name="idProductor" id="idProductor" value=<?php if(isset($muestra)) echo '"'.$muestra['IDProductor'].'" disabled';?>>
@@ -130,9 +145,9 @@ if ($_SESSION["s_usuario"] === null){
             <?php 
                 if(!isset($muestra)){
                     echo '
-                        <div class="imput-box">
-                            <header>Ingreso de datos de Muestra(s) a porcesar:</header>
-                        </div>
+                    <div class="mini-container">
+                            <header class="form-tittle">Ingreso de datos de Muestra(s) a procesar:</header>
+                        
                         <div id="mustrasAProcesar">
                             <div>
                                 <h1>Muestra 1</h1>
@@ -153,20 +168,23 @@ if ($_SESSION["s_usuario"] === null){
                                     <label for="fechaDeToma">Fecha de toma:</label><br>
                                     <input type="date" name="muestraAP[0][fechaDeToma]" id="fechaDeToma">
                                 </div>
-                                <div class="imput-box">
-                                    <label for="observaciones">Observaciones</label><br>
-                                    <input type="text" placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones">
-                                </div>
+
                             </div>
                         </div>
-                        <br><input type="button" value="Agregar" class="boton" id="btnAgregarMAP">
+                        <div class="comment-box">
+                            <label for="observaciones">Observaciones</label><br>
+                            <textarea placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones" class="obs" cols="30" rows="10"></textarea>
+                        </div>
+                        <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
+                    </div>    
                     ';      
                 }
             ?>
 
             <input type="submit" name="<?php if(isset($_GET['id'])) echo "actualizar"; else echo "guardar"; ?>" value="Guardar" class="button">
-
+            </div>
     </form>
+    </div>
 </section>
 <script src="./js/jquery/jquery-3.3.1.min.js"></script>
 <script src="./js/modalMuestraA.js"></script>

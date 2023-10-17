@@ -33,21 +33,21 @@ if ($_SESSION["s_usuario"] === null){
         $usuarios = new Usuario;
         $busqueda = (isset($_GET['busqueda'])) ? limpiarCadena($_GET['busqueda']) : "";
 
-        if(isset($_GET['idRolUpdate']) && $_GET['idRolUpdate'])
+        if(isset($_GET['idRolUpdate']) && is_numeric($_GET['idRolUpdate']) && $_GET['idRolUpdate'] > 0)
             if($usuarios->camiarRol($_GET['idRolUpdate']))
                 echo "Se ha cambiado el rol del usuario ". $_GET['idRolUpdate'];
             else
                 echo "No se ha podido cambiar el rol";
 
-        if(isset($_GET['idElim']) && $_GET['idElim'] > 0)
+        if(isset($_GET['idElim']) && is_numeric($_GET['idElim']) && $_GET['idElim'] > 0)
             if($usuarios->eliminarUser($_GET['idElim']))
-                echo "Usuario de ID ".$_GET['idElim']." ha sido eliminado";
+                echo "Usuario de ID ".$_GET['idElim']." ha sido eliminado<br>";
             else
                 echo "El usuario no pudo ser elimindo";
 
         $usuarios = $usuarios->listarUsuarios($busqueda);
         if (!$usuarios){
-            echo "No se han encontrado productores :(";
+            echo "No se han encontrado usuarios :(";
         }else{
             echo '      
             <table id="resultado">

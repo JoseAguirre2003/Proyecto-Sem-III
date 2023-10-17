@@ -19,8 +19,9 @@ if ($_SESSION["s_usuario"] === null){
         header("./logout.php");
 ?>
 
-<section class="container">
-            <header>Ingreso de datos de Productor:</header>
+<section class="sub-body">
+    <div class="sub-container">
+            <header class="form-tittle">Ingreso de datos de Productor:</header>
             <?php 
                 
                 include "./php/func.php";
@@ -37,48 +38,58 @@ if ($_SESSION["s_usuario"] === null){
 
                 if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0 && isset($_POST['actualizar'])){
                     $productor = new Productor;
-                    $productor->setNombre(limpiarCadena($_POST['nombre']));
-                    $productor->setCiRIF(limpiarCadena($_POST['cedulaRIF']));
-                    $productor->setDireccion(limpiarCadena($_POST['direccion']));
-                    $productor->setLocalidad(limpiarCadena($_POST['localidad']));
-                    $productor->setMunicipio(limpiarCadena($_POST['municipio']));
-                    $productor->setContacto(limpiarCadena($_POST['contacto']));
-                    $productor->setTraidoPor(limpiarCadena($_POST['traidoPor']));
-                    $productor->setCorreo(limpiarCadena($_POST['correo']));
-                    $productor->setAsesorTecnico(limpiarCadena($_POST['asesorTecnico']));
-                    $productor = $productor->actualizarProductor($_GET['id']);
-                    if($productor){
-                        echo "<br>ACTUALIZADO CON EXITO";
-                        $productor = new Productor;
-                        $productor = $productor->buscarProductor($_GET['id']);
+                    if(validarProductor($_POST['nombre'], $_POST['cedulaRIF'], $_POST['direccion'], $_POST['localidad'], $_POST['municipio'], $_POST['contacto'], $_POST['traidoPor'], $_POST['correo'], $_POST['asesorTecnico'])){ 
+                        $productor->setNombre(limpiarCadena($_POST['nombre']));
+                        $productor->setCiRIF(limpiarCadena($_POST['cedulaRIF']));
+                        $productor->setDireccion(limpiarCadena($_POST['direccion']));
+                        $productor->setLocalidad(limpiarCadena($_POST['localidad']));
+                        $productor->setMunicipio(limpiarCadena($_POST['municipio']));
+                        $productor->setContacto(limpiarCadena($_POST['contacto']));
+                        $productor->setTraidoPor(limpiarCadena($_POST['traidoPor']));
+                        $productor->setCorreo(limpiarCadena($_POST['correo']));
+                        $productor->setAsesorTecnico(limpiarCadena($_POST['asesorTecnico']));
+                        $productor = $productor->actualizarProductor($_GET['id']);
+                        if($productor){
+                            echo "<br>ACTUALIZADO CON EXITO";
+                            $productor = new Productor;
+                            $productor = $productor->buscarProductor($_GET['id']);
+                        }else{
+                            echo "<br>NO SE PUDO ACTUALIZAR";
+                            unset($productor);
+                        }
                     }else{
-                        echo "<br>NO SE PUDO ACTUALIZAR";
+                        echo "<br>NO SE PUDO ACTUALIZAR, DATOS ERRADOS";
                         unset($productor);
                     }
                 }else if(isset($_POST['guardar']) && isset($_POST['nombre']) && isset($_POST['cedulaRIF']) && isset($_POST['direccion']) && isset($_POST['contacto'])){
-                    $productor = new Productor;
-                    $productor->setNombre(limpiarCadena($_POST['nombre']));
-                    $productor->setCiRIF(limpiarCadena($_POST['cedulaRIF']));
-                    $productor->setDireccion(limpiarCadena($_POST['direccion']));
-                    $productor->setLocalidad(limpiarCadena($_POST['localidad']));
-                    $productor->setMunicipio(limpiarCadena($_POST['municipio']));
-                    $productor->setContacto(limpiarCadena($_POST['contacto']));
-                    $productor->setTraidoPor(limpiarCadena($_POST['traidoPor']));
-                    $productor->setCorreo(limpiarCadena($_POST['correo']));
-                    $productor->setAsesorTecnico(limpiarCadena($_POST['asesorTecnico']));
-                    $productor = $productor->guardarProductor();
-                    if($productor){
-                        echo "GUARDADO CON EXITO!! :)";
-                        unset($productor);
+                    if(validarProductor($_POST['nombre'], $_POST['cedulaRIF'], $_POST['direccion'], $_POST['localidad'], $_POST['municipio'], $_POST['contacto'], $_POST['traidoPor'], $_POST['correo'], $_POST['asesorTecnico'])){ 
+                        $productor = new Productor;
+                        $productor->setNombre(limpiarCadena($_POST['nombre']));
+                        $productor->setCiRIF(limpiarCadena($_POST['cedulaRIF']));
+                        $productor->setDireccion(limpiarCadena($_POST['direccion']));
+                        $productor->setLocalidad(limpiarCadena($_POST['localidad']));
+                        $productor->setMunicipio(limpiarCadena($_POST['municipio']));
+                        $productor->setContacto(limpiarCadena($_POST['contacto']));
+                        $productor->setTraidoPor(limpiarCadena($_POST['traidoPor']));
+                        $productor->setCorreo(limpiarCadena($_POST['correo']));
+                        $productor->setAsesorTecnico(limpiarCadena($_POST['asesorTecnico']));
+                        $productor = $productor->guardarProductor();
+                        if($productor){
+                            echo "GUARDADO CON EXITO!! :)";
+                            unset($productor);
+                        }else{
+                            echo "NO SE PUDO GUARDAR :(";
+                            unset($productor);
+                        }
                     }else{
-                        echo "NO SE PUDO GUARDAR :(";
+                        echo "<br>NO SE PUDO GUARDAR, DATOS ERRADOS";
                         unset($productor);
                     }
                 }
-
-                
+  
             ?>
             <form action="" method="POST" class="form">
+                <div class="main-user-info">
                 <div class="imput-box">
                     <label for="nombre">Nombre:</label>
                     <input type="text" placeholder="Nombre" name="nombre" id="nombre" value="<?php if(isset($productor)) echo $productor['Nombre'];?>">
@@ -125,7 +136,9 @@ if ($_SESSION["s_usuario"] === null){
                 </div>
 
                 <input type="submit" name="<?php if(isset($_GET['id'])) echo "actualizar"; else echo "guardar"; ?>" value="Guardar" class="button">
+                </div>
             </form>
+            </div>
         </section>
 
 <?php 

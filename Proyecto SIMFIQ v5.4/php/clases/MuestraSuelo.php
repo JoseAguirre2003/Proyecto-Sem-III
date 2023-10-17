@@ -74,11 +74,6 @@ class MuestraSuelo{
 		return $this;
 	}
 
-	public function setAnalisisARealizar($AnalisisARealizar){
-		$this->AnalisisARealizar = $AnalisisARealizar;
-		return $this;
-	}
-
 	public function getHectaria() {
 		return $this->hectaria;
 	}

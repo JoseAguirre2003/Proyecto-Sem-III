@@ -76,13 +76,15 @@ class Usuario{
 	}
 
 	public function eliminarUser($id){
-		$peticion = conexion();
-		$peticion = $peticion->prepare("DELETE FROM `users` WHERE `id` = ".$id.";");
+		$conexion = conexion();
+		$peticion = $conexion->prepare("DELETE FROM `userxprod` WHERE `IdUser` = ".$id.";");
 		$peticion->execute();
-		if($peticion->rowCount() > 0){
+		if($conexion->query("DELETE FROM `users` WHERE `id` = ".$id.";")){
+			$conexion = null;
 			$peticion = null;
 			return true;
-		}else {
+		}else{ 
+			$conexion = null;
 			$peticion = null;
 			return false;
 		}

@@ -28,8 +28,8 @@
         <section id="hero">
             <h1>Sistema de Muestras Físico Químicas</h1>
             <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br>Quo provident maxime laudantium adipisci
-                in repellendus consequuntur non tempore quae deleniti?
+                Nuestros resultados son precisos y confiables, para que pueda estar seguro de tomar desiciones correctas<br>
+                conozca el estado de su suelo y cultivos con nuestros analisis fisico-quimicos
             </p>
 
         </section>

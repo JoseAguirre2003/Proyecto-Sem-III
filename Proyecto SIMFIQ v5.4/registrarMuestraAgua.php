@@ -19,8 +19,9 @@ if ($_SESSION["s_usuario"] === null){
     else
         header("./logout.php");
 ?>
-    <section class="container">
-        <header>Ingreso de datos de Muestra:</header>
+    <section class="sub-body2">
+        <div class="sub-container2">
+        <header class="form-tittle">Ingreso de datos de Muestra de Agua:</header>
         <?php
         include_once "./php/func.php";
         include "./php/clases/MuestraAgua.php";
@@ -38,69 +39,82 @@ if ($_SESSION["s_usuario"] === null){
 
         if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0 && isset($_POST['actualizar'])){
             $muestra = new MuestraAgua;
-            $muestra->setFechaIngreso($_POST['fehaIngreso']);
-            $muestra->setFuenteAgua($_POST['fuenteAgua']);
-            $muestra->setRecibidoPor($_POST['recibidaPor']);
-            $muestra->setRecolectadaPor($_POST['recolectadaPor']);
-            $muestra->setCultivoARegar($_POST['cultivoARegar']);
-            $muestra->setProblemasDeSales($_POST['problemasSales']);
-            $muestra->setTratamiento_pH($_POST['tratamiento_pH']);
-            $muestra->setSistemaRiego($_POST['sistemaRiego']);
-            $muestra->setCantidadUsada($_POST['cantidadUsada']);
-            $muestra->setPHMetro($_POST['pHMetro']);
-            $muestra->setConductimetro($_POST['condcutimetro']);
-            $muestra->setUbicacion($_POST['ubicacion']);
-            $muestra->setObservacionesGenerales($_POST['observacionesGenerales']);
-            if($muestra->actualizarMuestra($_GET['id'])){
-                echo "<br>ACTUALIZADO CON EXITO :)";
-                $muestra = $muestra->buscarMuestra($_GET['id']);
+            if(validarMuestraAgua($_POST['fehaIngreso'], $_POST['fuenteAgua'], $_POST['recibidaPor'], $_POST['recolectadaPor'], $_POST['cultivoARegar'], $_POST['problemasSales'], $_POST['tratamiento_pH'], $_POST['sistemaRiego'], $_POST['cantidadUsada'], $_POST['pHMetro'], $_POST['condcutimetro'], $_POST['ubicacion'], $_POST['observacionesGenerales'])){
+                $muestra->setFechaIngreso($_POST['fehaIngreso']);
+                $muestra->setFuenteAgua($_POST['fuenteAgua']);
+                $muestra->setRecibidoPor($_POST['recibidaPor']);
+                $muestra->setRecolectadaPor($_POST['recolectadaPor']);
+                $muestra->setCultivoARegar($_POST['cultivoARegar']);
+                $muestra->setProblemasDeSales($_POST['problemasSales']);
+                $muestra->setTratamiento_pH($_POST['tratamiento_pH']);
+                $muestra->setSistemaRiego($_POST['sistemaRiego']);
+                $muestra->setCantidadUsada($_POST['cantidadUsada']);
+                $muestra->setPHMetro($_POST['pHMetro']);
+                $muestra->setConductimetro($_POST['condcutimetro']);
+                $muestra->setUbicacion($_POST['ubicacion']);
+                $muestra->setObservacionesGenerales($_POST['observacionesGenerales']);
+                if($muestra->actualizarMuestra($_GET['id'])){
+                    echo "<br>ACTUALIZADO CON EXITO :)";
+                    $muestra = $muestra->buscarMuestra($_GET['id']);
+                }else{
+                    echo "<br>NO SE PUDO ACTUALIZAR :(";
+                    unset($muestra);
+                }
             }else{
-                echo "<br>NO SE PUDO ACTUALIZAR :(";
+                echo "<br>NO SE PUDO ACTUALIZAR, DATOS ERRADOS";
                 unset($muestra);
             }
         }else if(isset($_POST['idProductor'])){
             $muestra = new MuestraAgua;
-            $muestra->setIdProductor($_POST['idProductor']);
-            $muestra->setFechaIngreso($_POST['fehaIngreso']);
-            $muestra->setFuenteAgua($_POST['fuenteAgua']);
-            $muestra->setRecibidoPor($_POST['recibidaPor']);
-            $muestra->setRecolectadaPor($_POST['recolectadaPor']);
-            $muestra->setCultivoARegar($_POST['cultivoARegar']);
-            $muestra->setProblemasDeSales($_POST['problemasSales']);
-            $muestra->setTratamiento_pH($_POST['tratamiento_pH']);
-            $muestra->setSistemaRiego($_POST['sistemaRiego']);
-            $muestra->setCantidadUsada($_POST['cantidadUsada']);
-            $muestra->setPHMetro($_POST['pHMetro']);
-            $muestra->setConductimetro($_POST['condcutimetro']);
-            $muestra->setUbicacion($_POST['ubicacion']);
-            $muestra->setObservacionesGenerales($_POST['observacionesGenerales']);
-            $IDMuestra = $muestra->guardarMuestra();
-            if(!$IDMuestra){
-                echo "No se ha podido guardar la muestra<br>";
-                unset($muestra);
-            }else{
-                echo "Se ha logrado guardar<br>";
-                $muestraAP = new MAaProcesar;
-                $contMuestras = 0;
-                foreach($_POST['muestraAP'] as $map){
-                    $muestraAP->setIdentificador($map['identificar']);
-                    $muestraAP->setAnalisisARealizar($map['analisisARealizar']);
-                    $muestraAP->setFechaDeToma($map['fechaDeToma']);
-                    $muestraAP->setObservaciones($map['observaciones']);
-                    if($muestraAP->guardarMuestraAProcesar_Agua($IDMuestra))
-                        $contMuestras++;
-                }
-                if($contMuestras == 0){
+            if(is_numeric($_POST['idProductor']) && validarMuestraAgua($_POST['fehaIngreso'], $_POST['fuenteAgua'], $_POST['recibidaPor'], $_POST['recolectadaPor'], $_POST['cultivoARegar'], $_POST['problemasSales'], $_POST['tratamiento_pH'], $_POST['sistemaRiego'], $_POST['cantidadUsada'], $_POST['pHMetro'], $_POST['condcutimetro'], $_POST['ubicacion'], $_POST['observacionesGenerales'])){
+                $muestra->setIdProductor($_POST['idProductor']);
+                $muestra->setFechaIngreso($_POST['fehaIngreso']);
+                $muestra->setFuenteAgua($_POST['fuenteAgua']);
+                $muestra->setRecibidoPor($_POST['recibidaPor']);
+                $muestra->setRecolectadaPor($_POST['recolectadaPor']);
+                $muestra->setCultivoARegar($_POST['cultivoARegar']);
+                $muestra->setProblemasDeSales($_POST['problemasSales']);
+                $muestra->setTratamiento_pH($_POST['tratamiento_pH']);
+                $muestra->setSistemaRiego($_POST['sistemaRiego']);
+                $muestra->setCantidadUsada($_POST['cantidadUsada']);
+                $muestra->setPHMetro($_POST['pHMetro']);
+                $muestra->setConductimetro($_POST['condcutimetro']);
+                $muestra->setUbicacion($_POST['ubicacion']);
+                $muestra->setObservacionesGenerales($_POST['observacionesGenerales']);
+                $IDMuestra = $muestra->guardarMuestra();
+                if(!$IDMuestra){
                     echo "No se ha podido guardar la muestra<br>";
-                    $muestra->eliminarMuestra($IDMuestra);
-                }else
-                    echo "Se han guardado $contMuestras meustras a procesar";
+                    unset($muestra);
+                }else{
+                    echo "Se ha logrado guardar<br>";
+                    $muestraAP = new MAaProcesar;
+                    $contMuestras = 0;
+                    foreach($_POST['muestraAP'] as $map){
+                        if(validarMuestrasAProcesar($map['identificar'], $map['analisisARealizar'], $map['fechaDeToma'], $map['observaciones'])){
+                            $muestraAP->setIdentificador($map['identificar']);
+                            $muestraAP->setAnalisisARealizar($map['analisisARealizar']);
+                            $muestraAP->setFechaDeToma($map['fechaDeToma']);
+                            $muestraAP->setObservaciones($map['observaciones']);
+                            if($muestraAP->guardarMuestraAProcesar_Agua($IDMuestra))
+                                $contMuestras++;
+                        }
+                    }
+                    if($contMuestras == 0){
+                        echo "No se ha podido guardar la muestra<br>";
+                        $muestra->eliminarMuestra($IDMuestra);
+                    }else
+                        echo "Se han guardado $contMuestras meustras a procesar";
+                    unset($muestra);
+                }
+            }else{
+                echo "<br>NO SE PUDO GUARDAR, DATOS ERRADOS";
                 unset($muestra);
             }
         }
         
         ?>
         <form action="" method="POST" class="form">
+        <div class="main-user-info2">
             <div class="imput-box">
                 <label for="idProductor">ID Productor:</label>
                 <input type="text" placeholder="ID del prodcutor" name="idProductor" id="idProductor" value=<?php if(isset($muestra)) echo '"'.$muestra['ID_Productor'].'" disabled';?>>
@@ -178,9 +192,9 @@ if ($_SESSION["s_usuario"] === null){
             <?php 
                 if(!isset($muestra)){
                     echo '
-                        <div class="imput-box">
-                            <header>Ingreso de datos de Muestra(s) a porcesar:</header>
-                        </div>
+                    <div class="mini-container">
+                            <header class="form-tittle">Ingreso de datos de Muestra(s) a procesar:</header>
+                       
                         <div id="mustrasAProcesar">
                             <div>
                                 <h1>Muestra 1</h1>
@@ -201,20 +215,27 @@ if ($_SESSION["s_usuario"] === null){
                                     <label for="fechaDeToma">Fecha de toma:</label><br>
                                     <input type="date" name="muestraAP[0][fechaDeToma]" id="fechaDeToma">
                                 </div>
-                                <div class="imput-box">
-                                    <label for="observaciones">Observaciones</label><br>
-                                    <input type="text" placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones">
-                                </div>
+                                
                             </div>
+                            
                         </div>
-                        <br><input type="button" value="Agregar" class="boton" id="btnAgregarMAP">
+                        <div class="comment-box">
+                                    <label for="observaciones">Observaciones</label><br>
+                                    
+                                    <textarea placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones" class="obs" cols="30" rows="10"></textarea>
+                        </div>
+                        
+                        <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
+                    </div>
                     ';      
                 }
             ?>
 
             
             <input type="submit" name="<?php if(isset($_GET['id'])) echo "actualizar"; else echo "guardar"; ?>" value="Guardar" class="button">
+            </div>
         </form>
+        </div>
     </section>
     <script src="./js/jquery/jquery-3.3.1.min.js"></script>
     <script src="./js/modalMuestraA.js"></script>

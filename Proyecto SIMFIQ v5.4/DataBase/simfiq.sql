@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2023 at 03:39 PM
+-- Generation Time: Oct 17, 2023 at 03:50 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,8 +38,7 @@ CREATE TABLE `maguaxmap` (
 --
 
 INSERT INTO `maguaxmap` (`IDRegistro`, `IDMuestraAgua`, `IDMuestraAProcesar`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(4, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -82,7 +81,7 @@ CREATE TABLE `muestra_agua` (
 --
 
 INSERT INTO `muestra_agua` (`ID_Muestra`, `ID_Productor`, `Fecha_Ingreso`, `Fuente_Agua`, `Recibido_Por`, `Recolectada_Por`, `Cultivo_A_Regar`, `Problemas_De_Sales`, `Tratamiento_pH`, `Sistema_Riego`, `Cantidad_Usada`, `pH_Metro`, `Conductimetro`, `Ubicacion`, `Observaciones_Generales`) VALUES
-(1, 3, '2023-10-15', 'Un pozo', 'Silvia', 'Mannolo', 'Marijuana', 'Si', 'algo hlcl', 'goteo', 1000.0000, 7, 0.0108, 'mi casa', 'Nada que decir, yo no se');
+(2, 9, '2023-10-03', 'Un rio por ahi', 'Marcos', 'Silvia', 'Marijuana', 'Si', 'no lo se jajaj algo con hcl jaja', 'goteo', 1000.0000, 1.21, 1111.0000, 'por ahi', 'nada');
 
 -- --------------------------------------------------------
 
@@ -104,7 +103,8 @@ CREATE TABLE `muestra_a_procesar` (
 
 INSERT INTO `muestra_a_procesar` (`IDMuestra_A_Procesar`, `Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`) VALUES
 (1, 'AA1', 'Conductividad', '2023-10-15', 'Nada que decir'),
-(2, 'AA2', 'Conductividad', '2023-10-15', 'ndax2');
+(4, 'S1', 'Conductividad', '2023-10-16', 'Nada mas que decir que quieres que diga conchale'),
+(5, 'AAA1', 'Conductividad', '2023-10-16', 'NADA QUE DECIR');
 
 -- --------------------------------------------------------
 
@@ -150,8 +150,9 @@ CREATE TABLE `productor` (
 INSERT INTO `productor` (`ID_Productor`, `Nombre`, `Cedula_RIF`, `Direccion`, `Localidad`, `Municipio`, `Contacto`, `Traido_Por`, `Correo`, `Asesor_Tecnico`) VALUES
 (1, 'Cafe Amanecer', '123456789', 'Calle 1 Vereda 6', 'Portuguesa', 'nocelosmunicioios', '0251123456', 'Pablo Perez Bolanez', 'cafeamacener@gmail.com', 'Ing Jose Jose'),
 (2, 'unosNarcosAhi', '12345678', 'su platacion', 'Apure', 'Algo en apure', '04121234567', 'Miguel', 'mugue@gmail.com', 'Miguel tambien'),
-(3, 'El Rancho de Juan Carlos', '123456789', 'por ahi', 'por ahi dije', 'noC', '04121234567', 'Juan', 'juan@gmail.com', 'Ramses'),
-(8, 'Jhonny', '30161797', 'mah', 'meh', 'mih', '04125433322', 'Kyle', 'jhnny@gmail.com', 'Sutano');
+(3, 'El Rancho de Juan Carlos', '123456789', 'por ahi', 'por ahi dije', 'noCe jajajaj', '04121234567', 'Juan Garnizo', 'juan@gmail.com', 'Ramses'),
+(8, 'Jhonny', '30161797', 'mah', 'meh', 'mih', '04125433322', 'Kyle', 'jhnny@gmail.com', 'Sutano'),
+(9, 'Jose', '30161797', 'Tabure', 'Vallehondo', 'Palavecino', '04128952280', 'Jose', 'jose@gmail.com', 'Silvia Mendoza');
 
 -- --------------------------------------------------------
 
@@ -173,9 +174,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `fullname`, `email`, `username`, `password`, `idRol`) VALUES
-(3, 'Jose Aguirre', 'jose@gmail.com', 'KavuDare', '85a1ff510148349760baee8e88b1f0c4', 1),
-(4, 'pepe', 'pepe@gmail.com', 'pepe1', '81dc9bdb52d04dc20036dbd8313ed055', 0),
-(5, 'Yannelly', 'yan@gmail.com', 'yannita', '25f9e794323b453885f5181f1b624d0b', 0);
+(3, 'Jose Aguirre', 'jose@gmail.com', 'KavuDare', '85a1ff510148349760baee8e88b1f0c4', 1);
 
 -- --------------------------------------------------------
 
@@ -194,9 +193,8 @@ CREATE TABLE `userxprod` (
 --
 
 INSERT INTO `userxprod` (`idRegist`, `IdUser`, `IdProductor`) VALUES
-(4, 4, 1),
-(5, 4, 2),
-(10, 3, 8);
+(10, 3, 8),
+(11, 3, 9);
 
 --
 -- Indexes for dumped tables
@@ -266,49 +264,49 @@ ALTER TABLE `userxprod`
 -- AUTO_INCREMENT for table `maguaxmap`
 --
 ALTER TABLE `maguaxmap`
-  MODIFY `IDRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IDRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `msueloxmap`
 --
 ALTER TABLE `msueloxmap`
-  MODIFY `IDRegistro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `muestra_agua`
 --
 ALTER TABLE `muestra_agua`
-  MODIFY `ID_Muestra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_Muestra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `muestra_a_procesar`
 --
 ALTER TABLE `muestra_a_procesar`
-  MODIFY `IDMuestra_A_Procesar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `IDMuestra_A_Procesar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `muestra_suelo`
 --
 ALTER TABLE `muestra_suelo`
-  MODIFY `IDMuestraSuelo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDMuestraSuelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `productor`
 --
 ALTER TABLE `productor`
-  MODIFY `ID_Productor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_Productor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `userxprod`
 --
 ALTER TABLE `userxprod`
-  MODIFY `idRegist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idRegist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
