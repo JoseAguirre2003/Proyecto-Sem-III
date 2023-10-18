@@ -228,14 +228,14 @@ if ($_SESSION["s_usuario"] === null){
                                         <textarea placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones" class="obs" cols="30" rows="10"></textarea>
                             </div>
                             
-                            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
+                            
                         </div>
                     </article>
                     ';      
                 }
             ?>
 
-            
+            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP"><br>
             <input type="submit" name="<?php if(isset($_GET['id'])) echo "actualizar"; else echo "guardar"; ?>" value="Guardar" class="button">
             </div>
         </form>
