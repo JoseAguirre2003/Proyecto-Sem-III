@@ -4,7 +4,7 @@
         <a href="./registarProductor.php">Registrar Productor</a>
         <a href="./listaProductores.php">Lista de Productores</a>
         <a href="./registrarMuestraAgua.php">Registrar Muestras de Agua</a>
-        <a href="./registrarMuestraSuelo"></a>
+        <a href="./registrarMuestraSuelo.php">Registrar Muestra de Suelo</a>
         <a href="./php/logout.php">Logout</a>
         <!-- <a href="">Registrar Muestras de Agua a Procesar</a> -->
     </nav>

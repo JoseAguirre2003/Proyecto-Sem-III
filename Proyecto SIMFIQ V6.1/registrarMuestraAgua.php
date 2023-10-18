@@ -18,7 +18,7 @@ if ($_SESSION["s_usuario"] === null){
         }
     else
         header("./logout.php");
-?>
+?>  
     <section class="sub-body2">
         <div class="sub-container2">
         <header class="form-tittle">Ingreso de datos de Muestra de Agua:</header>
@@ -64,8 +64,9 @@ if ($_SESSION["s_usuario"] === null){
                 echo "<br>NO SE PUDO ACTUALIZAR, DATOS ERRADOS";
                 unset($muestra);
             }
-        }else if(isset($_POST['idProductor'])){
+        }else if(isset($_POST['idProductor']) && isset($_POST['guardar'])){
             $muestra = new MuestraAgua;
+            echo "Se esta intentando guardar";
             if(is_numeric($_POST['idProductor']) && validarMuestraAgua($_POST['fehaIngreso'], $_POST['fuenteAgua'], $_POST['recibidaPor'], $_POST['recolectadaPor'], $_POST['cultivoARegar'], $_POST['problemasSales'], $_POST['tratamiento_pH'], $_POST['sistemaRiego'], $_POST['cantidadUsada'], $_POST['pHMetro'], $_POST['condcutimetro'], $_POST['ubicacion'], $_POST['observacionesGenerales'])){
                 $muestra->setIdProductor($_POST['idProductor']);
                 $muestra->setFechaIngreso($_POST['fehaIngreso']);
@@ -82,6 +83,7 @@ if ($_SESSION["s_usuario"] === null){
                 $muestra->setUbicacion($_POST['ubicacion']);
                 $muestra->setObservacionesGenerales($_POST['observacionesGenerales']);
                 $IDMuestra = $muestra->guardarMuestra();
+                echo $IDMuestra;
                 if(!$IDMuestra){
                     echo "No se ha podido guardar la muestra<br>";
                     unset($muestra);
@@ -100,7 +102,7 @@ if ($_SESSION["s_usuario"] === null){
                         }
                     }
                     if($contMuestras == 0){
-                        echo "No se ha podido guardar la muestra<br>";
+                        echo "No se han podido guardar las muestra a procesar<br>";
                         $muestra->eliminarMuestra($IDMuestra);
                     }else
                         echo "Se han guardado $contMuestras meustras a procesar";
@@ -110,14 +112,15 @@ if ($_SESSION["s_usuario"] === null){
                 echo "<br>NO SE PUDO GUARDAR, DATOS ERRADOS";
                 unset($muestra);
             }
-        }
+        }else
+            echo "No se ha hecho nada";
         
         ?>
         <form action="" method="POST" class="form">
         <div class="main-user-info2">
             <div class="imput-box">
                 <label for="idProductor">ID Productor:</label>
-                <input type="text" placeholder="ID del prodcutor" name="idProductor" id="idProductor" value=<?php if(isset($muestra)) echo '"'.$muestra['ID_Productor'].'" disabled'; else if($_GET['idRegist']) echo '"'.$_GET['idRegist'].'" disabled';?>>
+                <input type="text" placeholder="ID del prodcutor" name="idProductor" id="idProductor" value=<?php if(isset($muestra)) echo '"'.$muestra['ID_Productor'].'" disabled'; else if(isset($_GET['idRegist'])) echo '"'.$_GET['idRegist'].'" readonly';?>>
             </div>
 
             <div class="imput-box">
@@ -192,41 +195,42 @@ if ($_SESSION["s_usuario"] === null){
             <?php 
                 if(!isset($muestra)){
                     echo '
-                    <div class="mini-container">
-                            <header class="form-tittle">Ingreso de datos de Muestra(s) a procesar:</header>
-                       
-                        <div id="mustrasAProcesar">
-                            <div>
-                                <h1>Muestra 1</h1>
-                                <div class="imput-box">
-                                    <label for="identificador">Identificador:</label>
-                                    <input type="text" placeholder="Indentificador" name="muestraAP[0][identificar]" id="identificador">
-                                </div>
-                                <div class="imput-box">
-                                    <label for="analisisARealizar">Analisis a realizar:</label>
-                                    <select name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
-                                        <option value="pH">pH</option>
-                                        <option value="Conductividad">Conductividad</option>
-                                        <option value="particulasFlotantes">Particulas Flotantes</option>
-                                        <option value="Todo">Todo</option>
-                                    </select>
-                                </div>
-                                <div class="imput-box">
-                                    <label for="fechaDeToma">Fecha de toma:</label><br>
-                                    <input type="date" name="muestraAP[0][fechaDeToma]" id="fechaDeToma">
+                    <article id="articleModal">
+                        <div class="mini-container">
+                        <header class="form-tittle">Ingreso de datos de Muestra(s) a procesar:</header>
+                            <div id="mustrasAProcesar">
+                                <div>
+                                    <h1>Muestra 1</h1>
+                                    <div class="imput-box">
+                                        <label for="identificador">Identificador:</label>
+                                        <input type="text" placeholder="Indentificador" name="muestraAP[0][identificar]" id="identificador">
+                                    </div>
+                                    <div class="imput-box">
+                                        <label for="analisisARealizar">Analisis a realizar:</label>
+                                        <select name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
+                                            <option value="pH">pH</option>
+                                            <option value="Conductividad">Conductividad</option>
+                                            <option value="Especial">Particulas Flotantes</option>
+                                            <option value="Todo">Todo</option>
+                                        </select>
+                                    </div>
+                                    <div class="imput-box">
+                                        <label for="fechaDeToma">Fecha de toma:</label><br>
+                                        <input type="date" name="muestraAP[0][fechaDeToma]" id="fechaDeToma">
+                                    </div>
+                                    
                                 </div>
                                 
                             </div>
+                            <div class="comment-box">
+                                        <label for="observaciones">Observaciones</label><br>
+                                        
+                                        <textarea placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones" class="obs" cols="30" rows="10"></textarea>
+                            </div>
                             
+                            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
                         </div>
-                        <div class="comment-box">
-                                    <label for="observaciones">Observaciones</label><br>
-                                    
-                                    <textarea placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones" class="obs" cols="30" rows="10"></textarea>
-                        </div>
-                        
-                        <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
-                    </div>
+                    </article>
                     ';      
                 }
             ?>

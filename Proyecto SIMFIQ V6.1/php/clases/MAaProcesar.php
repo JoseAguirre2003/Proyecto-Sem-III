@@ -44,8 +44,8 @@
 
         public function guardarMuestraAProcesar_Agua($IDMuestra){
             $conexion = conexion();
-            $peticion = $conexion->prepare("INSERT INTO `muestra_a_procesar` (`Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`)
-                                            VALUES ('".$this->identificador."', '".$this->analisisARealizar."', '".$this->fechaDeToma."', '".$this->observaciones."');");
+            $peticion = $conexion->prepare("INSERT INTO `muestra_a_procesar` (`Tipo`, `Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`)
+                                            VALUES ('Agua' ,'".$this->identificador."', '".$this->analisisARealizar."', '".$this->fechaDeToma."', '".$this->observaciones."');");
             $peticion->execute();
             if($peticion->rowCount() == 1){
                 $peticion = $conexion;
@@ -61,8 +61,8 @@
 
         public function guardarMuestraAProcesar_Suelo($IDMuestra){
             $conexion = conexion();
-            $peticion = $conexion->prepare("INSERT INTO `muestra_a_procesar` (`Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`)
-                                            VALUES ('".$this->identificador."', '".$this->analisisARealizar."', '".$this->fechaDeToma."', '".$this->observaciones."');");
+            $peticion = $conexion->prepare("INSERT INTO `muestra_a_procesar` (`Tipo`, `Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`)
+                                            VALUES ('Suelo' ,'".$this->identificador."', '".$this->analisisARealizar."', '".$this->fechaDeToma."', '".$this->observaciones."');");
             $peticion->execute();
             if($peticion->rowCount() == 1){
                 $peticion = $conexion;

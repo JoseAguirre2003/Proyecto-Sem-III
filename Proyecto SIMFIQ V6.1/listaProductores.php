@@ -35,9 +35,9 @@ if ($_SESSION["s_usuario"] === null){
 
         if(isset($_POST['eliminar']) && (isset($_GET['idElim']) && is_numeric($_GET['idElim']))){
             if($productores->eliminarProductor($_GET['idElim']))
-                echo "Sea Eliminado el Productor de ID: ".$_GET['idElim'];
+                echo "Sea Eliminado el Productor de ID: ".$_GET['idElim']."<br>";
             else
-                echo "No pudo elimiar el Productor de ID: ".$_GET['idElim'];
+                echo "No pudo elimiar el Productor de ID: ".$_GET['idElim']."<br>";
         }
 
         $pagInicial = (isset($_GET['paginaInicial']) && is_numeric($_GET['paginaInicial']) && $_GET['paginaInicial'] > 1) ? $_GET['paginaInicial'] : 1;

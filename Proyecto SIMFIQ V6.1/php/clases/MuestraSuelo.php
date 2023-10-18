@@ -90,8 +90,12 @@ class MuestraSuelo{
 		$peticion->execute();
 		if($peticion->rowCount() == 1){
 			$peticion = $conexion;
-			return $peticion->query("SELECT LAST_INSERT_ID()")->fetch()[0];
+			$idMuestra = $peticion->query("SELECT LAST_INSERT_ID()")->fetch()[0];
+			$conexion = null;
+			$peticion = null;
+			return $idMuestra;
 		}else{
+			$conexion = null;
 			$peticion = null;
 			return false;
 		}
