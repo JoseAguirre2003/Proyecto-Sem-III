@@ -32,7 +32,7 @@ if ($_SESSION["s_usuario"] === null){
             if(!$muestra)
                 unset($muestra);
             else
-                echo "ID de la Muestra a cambiar: ".$muestra['IDMuestraSuelo'];
+                echo "ID de la Muestra a cambiar: ".$muestra['IDMuestraSuelo']."<br>";
         }else
             unset($_GET['id']);
 
@@ -70,14 +70,12 @@ if ($_SESSION["s_usuario"] === null){
                 $muestra->setProfundidad($_POST['profundidad']);
                 $muestra->setUsoAnterior($_POST['usoAnterior']);
                 $muestra->setHectaria($_POST['hectaria']);
-                echo "Pasada las validacionens de muestra<br>";
                 $IDMuestra = $muestra->guardarMuestra();
                 if(!$IDMuestra){
                     echo "No se ha podido guardar la muestra<br>";
                     unset($muestra);
                 }else{
                     echo "Se ha guardado con exito<br>";
-                    echo "Se guardaran muestras a procesar en $IDMuestra<br>";
                     $muestraAP = new MAaProcesar;
                     $contMuestras = 0;
                     foreach($_POST['muestraAP'] as $map){
@@ -86,17 +84,16 @@ if ($_SESSION["s_usuario"] === null){
                             $muestraAP->setAnalisisARealizar($map['analisisARealizar']);
                             $muestraAP->setFechaDeToma($map['fechaDeToma']);
                             $muestraAP->setObservaciones($map['observaciones']);
-                            echo "Pasada las validacionens de muestra a procesar #". ($contMuestras+1). "<br>";
                             if($muestraAP->guardarMuestraAProcesar_Suelo($IDMuestra))
                                 $contMuestras++;
                         }else
-                            echo "datos errados";
+                            echo "Dato errado en la muesra ".$contMuestras+1;
                     }
                     if($contMuestras == 0){
                         echo "No se han podido guardar las muestra<br>";
                         $muestra->eliminarMuestra($IDMuestra);
                     }else
-                        echo "Se han guardado $contMuestras meustras a procesar";
+                        echo "Se han guardado $contMuestras meustras a procesar<br>";
                     unset($muestra);
                 }
             }else{
@@ -164,7 +161,7 @@ if ($_SESSION["s_usuario"] === null){
                                         <select name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
                                             <option value="pH">pH</option>
                                             <option value="Conductividad">Conductividad</option>
-                                            <option value="Especial">Particulas Flotantes</option>
+                                            <option value="Especial">Textura</option>
                                             <option value="Todo">Todo</option>
                                         </select>
                                     </div>
@@ -182,46 +179,12 @@ if ($_SESSION["s_usuario"] === null){
                                         <textarea placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones" class="obs" cols="30" rows="10"></textarea>
                             </div>
                             
-                            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
+                            
                         </div>
                     </article> ';
-                    // echo '
-                    // <div class="mini-container">
-                    //         <header class="form-tittle">Ingreso de datos de Muestra(s) a procesar:</header>
-                        
-                    //     <div id="mustrasAProcesar">
-                    //         <div>
-                    //             <h1>Muestra 1</h1>
-                    //             <div class="imput-box">
-                    //                 <label for="identificador">Identificador:</label>
-                    //                 <input type="text" placeholder="Indentificador" name="muestraAP[0][identificar]" id="identificador">
-                    //             </div>
-                    //             <div class="imput-box">
-                    //                 <label for="analisisARealizar">Analisis a realizar:</label>
-                    //                 <select name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
-                    //                     <option value="pH">pH</option>
-                    //                     <option value="Conductividad">Conductividad</option>
-                    //                     <option value="Especial">Textura</option>
-                    //                     <option value="Todo">Todo</option>
-                    //                 </select>
-                    //             </div>
-                    //             <div class="imput-box">
-                    //                 <label for="fechaDeToma">Fecha de toma:</label><br>
-                    //                 <input type="date" name="muestraAP[0][fechaDeToma]" id="fechaDeToma">
-                    //             </div>
-
-                    //         </div>
-                    //     </div>
-                    //     <div class="comment-box">
-                    //         <label for="observaciones">Observaciones</label><br>
-                    //         <textarea placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones" class="obs" cols="30" rows="10"></textarea>
-                    //     </div>
-                    //     <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
-                    // </div>    
-                    // ';
                 }
             ?>
-
+            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
             <input type="submit" name="<?php if(isset($_GET['id'])) echo "actualizar"; else echo "guardar"; ?>" value="Guardar" class="button">
             </div>
     </form>

@@ -33,7 +33,7 @@ if ($_SESSION["s_usuario"] === null){
             if(!$muestra)
                 unset($muestra);
             else
-                echo "ID de la Muestra a cambiar: ".$muestra['ID_Muestra'];
+                echo "ID de la Muestra a cambiar: ".$muestra['ID_Muestra'].'<br>';
         }else
             unset($_GET['id']);
 
@@ -66,7 +66,6 @@ if ($_SESSION["s_usuario"] === null){
             }
         }else if(isset($_POST['idProductor']) && isset($_POST['guardar'])){
             $muestra = new MuestraAgua;
-            echo "Se esta intentando guardar";
             if(is_numeric($_POST['idProductor']) && validarMuestraAgua($_POST['fehaIngreso'], $_POST['fuenteAgua'], $_POST['recibidaPor'], $_POST['recolectadaPor'], $_POST['cultivoARegar'], $_POST['problemasSales'], $_POST['tratamiento_pH'], $_POST['sistemaRiego'], $_POST['cantidadUsada'], $_POST['pHMetro'], $_POST['condcutimetro'], $_POST['ubicacion'], $_POST['observacionesGenerales'])){
                 $muestra->setIdProductor($_POST['idProductor']);
                 $muestra->setFechaIngreso($_POST['fehaIngreso']);
@@ -83,7 +82,7 @@ if ($_SESSION["s_usuario"] === null){
                 $muestra->setUbicacion($_POST['ubicacion']);
                 $muestra->setObservacionesGenerales($_POST['observacionesGenerales']);
                 $IDMuestra = $muestra->guardarMuestra();
-                echo $IDMuestra;
+                echo "Se guaradara en ".$IDMuestra;
                 if(!$IDMuestra){
                     echo "No se ha podido guardar la muestra<br>";
                     unset($muestra);
@@ -99,21 +98,21 @@ if ($_SESSION["s_usuario"] === null){
                             $muestraAP->setObservaciones($map['observaciones']);
                             if($muestraAP->guardarMuestraAProcesar_Agua($IDMuestra))
                                 $contMuestras++;
-                        }
+                        }else
+                            echo "Dato errado en la muesra ".$contMuestras+1;
                     }
                     if($contMuestras == 0){
                         echo "No se han podido guardar las muestra a procesar<br>";
                         $muestra->eliminarMuestra($IDMuestra);
                     }else
-                        echo "Se han guardado $contMuestras meustras a procesar";
+                        echo "Se han guardado $contMuestras meustras a procesar<br>";
                     unset($muestra);
                 }
             }else{
                 echo "<br>NO SE PUDO GUARDAR, DATOS ERRADOS";
                 unset($muestra);
             }
-        }else
-            echo "No se ha hecho nada";
+        }
         
         ?>
         <form action="" method="POST" class="form">
@@ -226,8 +225,7 @@ if ($_SESSION["s_usuario"] === null){
                                         <label for="observaciones">Observaciones</label><br>
                                         
                                         <textarea placeholder="Observaciones..." name="muestraAP[0][observaciones]" id="observaciones" class="obs" cols="30" rows="10"></textarea>
-                            </div>
-                            
+                            </div>   
                             
                         </div>
                     </article>
@@ -245,3 +243,4 @@ if ($_SESSION["s_usuario"] === null){
     <script src="./js/modalMuestraA.js"></script>
 
 <?php include "./inc/htmlClose.php"; ?>
+
