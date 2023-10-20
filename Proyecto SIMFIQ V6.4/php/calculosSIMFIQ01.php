@@ -1,5 +1,18 @@
 <?php
 
+function calcular_Ce($Ce1, $Ce2){
+  return ($Ce1 + $Ce2) / 2;
+}
+
+function calcular_pH($pH1, $pH2){
+  return ($pH1 + $pH2) / 2;
+}
+
+function Calcular_PorcentajeParticulasSuspension($peso_seco, $peso_inicial) {
+  $peso_seco_en_mg = $peso_seco * 1000;
+  return ($peso_seco_en_mg / $peso_inicial) * 100;
+}
+
 //SUELOS
 
 /* pH Porcentaje de Hidrógeno en suelo, un simple promedio

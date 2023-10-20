@@ -19,8 +19,9 @@ if ($_SESSION["s_usuario"] === null){
     else
         header("./logout.php");
 ?>
-    <section class="container">
-            <header>Ingreso de datos de Muestra a Procesar:</header>
+    <section class="sub-body">
+        <div class="sub-container">
+            <header class="form-tittle">Ingreso de datos de Muestra a Procesar:</header>
             <?php 
                 include_once "./php/func.php";
                 include "./php/clases/MAaProcesar.php";
@@ -61,6 +62,7 @@ if ($_SESSION["s_usuario"] === null){
                 
             ?>
             <form action="" method="POST" class="form">
+            <div class="main-user-info">
                 <div class="imput-box">
                     <label for="idMuestra">ID de Muestra:</label>
                     <input type="text" placeholder="Id" name="idMuestra" id="idMuestra" value=<?php if(isset($muestrasAProcesar)) echo '"'.$muestrasAProcesar['IDMuestra_A_Procesar'].'" disabled';?>>
@@ -88,7 +90,9 @@ if ($_SESSION["s_usuario"] === null){
 
                 <input type="submit" name="actualizar" value="Actualizar" class="button">
                 <input type="submit" name="eliminar" value="Eliminar" class="button">
+                </div>
             </form>
+        </div>
         </section>
 
 <?php include "./inc/htmlClose.php"; ?>

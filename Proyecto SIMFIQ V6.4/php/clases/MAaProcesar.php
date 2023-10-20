@@ -128,6 +128,15 @@
             $peticion = null;
             return $array;
         }
+
+        public function verTipo($id){
+            $peticion = conexion();
+            $peticion = $peticion->prepare("SELECT `Tipo`, `Analisis_A_Realizar` FROM `muestra_a_procesar` WHERE `IDMuestra_A_Procesar` = '$id';");
+            $peticion->execute();
+            $tipo = $peticion->fetch();
+            $peticion = null;
+            return $tipo;
+        }
         
     }
 

@@ -161,7 +161,8 @@ if ($_SESSION["s_usuario"] === null){
                                         <select name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
                                             <option value="pH">pH</option>
                                             <option value="Conductividad">Conductividad</option>
-                                            <option value="Especial">Textura</option>
+                                            <option value="CIC">CIC</option>
+                                            <option value="Textura">Textura</option>
                                             <option value="Todo">Todo</option>
                                         </select>
                                     </div>
@@ -184,7 +185,7 @@ if ($_SESSION["s_usuario"] === null){
                     </article> ';
                 }
             ?>
-            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP">
+            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP_Suelo">
             <input type="submit" name="<?php if(isset($_GET['id'])) echo "actualizar"; else echo "guardar"; ?>" value="Guardar" class="button">
             </div>
     </form>

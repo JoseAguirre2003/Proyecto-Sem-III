@@ -82,7 +82,6 @@ if ($_SESSION["s_usuario"] === null){
                 $muestra->setUbicacion($_POST['ubicacion']);
                 $muestra->setObservacionesGenerales($_POST['observacionesGenerales']);
                 $IDMuestra = $muestra->guardarMuestra();
-                echo "Se guaradara en ".$IDMuestra;
                 if(!$IDMuestra){
                     echo "No se ha podido guardar la muestra<br>";
                     unset($muestra);
@@ -209,7 +208,7 @@ if ($_SESSION["s_usuario"] === null){
                                         <select name="muestraAP[0][analisisARealizar]" id="analisisARealizar">
                                             <option value="pH">pH</option>
                                             <option value="Conductividad">Conductividad</option>
-                                            <option value="Especial">Particulas Flotantes</option>
+                                            <option value="ParticulasFlotantes">Particulas Flotantes</option>
                                             <option value="Todo">Todo</option>
                                         </select>
                                     </div>
@@ -233,7 +232,7 @@ if ($_SESSION["s_usuario"] === null){
                 }
             ?>
 
-            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP"><br>
+            <br><input type="button" value="Agregar" class="button" id="btnAgregarMAP_Agua"><br>
             <input type="submit" name="<?php if(isset($_GET['id'])) echo "actualizar"; else echo "guardar"; ?>" value="Guardar" class="button">
             </div>
         </form>

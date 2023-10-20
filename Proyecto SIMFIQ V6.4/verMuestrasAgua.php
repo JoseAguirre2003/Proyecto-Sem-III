@@ -123,7 +123,7 @@ if ($_SESSION["s_usuario"] === null){
                 foreach ($muestrasAProcesar as $rowAP) {
                     echo '
                                 <tr>
-                                    <td id="idMuestraAProcesar">' . $rowAP['IDMuestra_A_Procesar'] . '</td>
+                                <td id="idMuestraAProcesar"><a href="./registrarMuestrasAAProcesar.php?id='.$rowAP['IDMuestra_A_Procesar'].'">' . $rowAP['IDMuestra_A_Procesar'] . '</a></td>
                                     <td id="Identificador">' . $rowAP['Identificador'] . '</td>
                                     <td id="analisisARealizar">' . $rowAP['Analisis_A_Realizar'] . '</td>
                                     <td id="fechaDeToma">' . $rowAP['Fecha_De_Toma'] . '</td>
@@ -132,7 +132,6 @@ if ($_SESSION["s_usuario"] === null){
                                 
                             ';
                 }
-
                 echo '
                                 </tbody>
                             </table>

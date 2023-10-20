@@ -117,7 +117,7 @@
 	function validarMuestrasAProcesar($identificador, $analisisARealizar, $fechaDeToma, $observaciones){
 		if(limpiarCadena($identificador) == "")
 			return false;
-		if(limpiarCadena($analisisARealizar) != "pH" && limpiarCadena($analisisARealizar) != "Conductividad" && limpiarCadena($analisisARealizar) != "Especial" && limpiarCadena($analisisARealizar) != "Todo")
+		if(limpiarCadena($analisisARealizar) != "pH" && limpiarCadena($analisisARealizar) != "Conductividad" && limpiarCadena($analisisARealizar) != "Textura" && limpiarCadena($analisisARealizar) != "CIC" && limpiarCadena($analisisARealizar) != "ParticulasFlotantes" && limpiarCadena($analisisARealizar) != "Todo")
 			return false;
 		if(!DateTime::createFromFormat("Y-m-d", $fechaDeToma))
 			return false;
