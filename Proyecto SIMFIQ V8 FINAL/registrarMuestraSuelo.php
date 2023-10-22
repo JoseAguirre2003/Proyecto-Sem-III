@@ -162,7 +162,6 @@ if ($_SESSION["s_usuario"] === null){
                                             <option value="pH">pH</option>
                                             <option value="Conductividad">Conductividad</option>
                                             <option value="CIC">CIC</option>
-                                            <option value="Textura">Textura</option>
                                             <option value="Todo">Todo</option>
                                         </select>
                                     </div>

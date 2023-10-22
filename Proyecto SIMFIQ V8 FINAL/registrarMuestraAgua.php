@@ -98,7 +98,7 @@ if ($_SESSION["s_usuario"] === null){
                             if($muestraAP->guardarMuestraAProcesar_Agua($IDMuestra))
                                 $contMuestras++;
                         }else
-                            echo "Dato errado en la muesra ".$contMuestras+1;
+                            echo "Dato errado en la muestra ".$contMuestras+1;
                     }
                     if($contMuestras == 0){
                         echo "No se han podido guardar las muestra a procesar<br>";

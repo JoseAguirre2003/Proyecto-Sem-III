@@ -357,3 +357,18 @@ textarea.obs{
  
 }
 
+a{
+    margin: 25px 0;
+    font-size: 1em;
+    color: black;
+    text-decoration: none;
+}
+
+a:hover, a:nth-child(1){
+    color: #37ff00;
+}
+
+a:nth-child(1):hover{
+    text-decoration: underline 2px;
+    text-underline-offset: 5px;
+}

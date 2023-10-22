@@ -180,6 +180,7 @@
         }
 
         public function eliminarMuestra($id){
+            
             $peticion = conexion();
             $peticion = $peticion->prepare("DELETE FROM `muestra_agua` WHERE `ID_Muestra` = ".$id.";");
             $peticion->execute();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 09:01 PM
+-- Generation Time: Oct 22, 2023 at 04:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,9 +42,8 @@ CREATE TABLE `analisis` (
 --
 
 INSERT INTO `analisis` (`IDAnalisis`, `IDMAP`, `pH`, `Ce`, `Suelo_CIC`, `Suelo_Textura`, `Agua_ParticulasSuspension`) VALUES
-(16, 16, '7', '', '', '', ''),
-(17, 20, '7', '7', '', '', '500000'),
-(18, 15, '', '', '', '', '100000');
+(20, 25, '9', '1.5', '', '', '40000'),
+(21, 23, '7', '12.5', '1', '', '');
 
 -- --------------------------------------------------------
 
@@ -63,9 +62,8 @@ CREATE TABLE `facturacion` (
 --
 
 INSERT INTO `facturacion` (`ID_Facture`, `IDAnalisis`, `Precio`) VALUES
-(11, 16, 5.00),
-(12, 17, 15.00),
-(13, 18, 5.00);
+(15, 20, 15.00),
+(16, 21, 20.00);
 
 -- --------------------------------------------------------
 
@@ -84,11 +82,8 @@ CREATE TABLE `maguaxmap` (
 --
 
 INSERT INTO `maguaxmap` (`IDRegistro`, `IDMuestraAgua`, `IDMuestraAProcesar`) VALUES
-(5, 19, 13),
-(6, 20, 14),
-(7, 21, 15),
-(8, 21, 16),
-(9, 22, 20);
+(12, 24, 25),
+(13, 24, 26);
 
 -- --------------------------------------------------------
 
@@ -107,10 +102,8 @@ CREATE TABLE `msueloxmap` (
 --
 
 INSERT INTO `msueloxmap` (`IDRegistro`, `IDMuestraSuelo`, `IDMuestraAProcesar`) VALUES
-(7, 22, 11),
-(8, 22, 12),
-(9, 23, 17),
-(10, 23, 18);
+(11, 24, 23),
+(12, 24, 24);
 
 -- --------------------------------------------------------
 
@@ -141,10 +134,7 @@ CREATE TABLE `muestra_agua` (
 --
 
 INSERT INTO `muestra_agua` (`ID_Muestra`, `ID_Productor`, `Fecha_Ingreso`, `Fuente_Agua`, `Recibido_Por`, `Recolectada_Por`, `Cultivo_A_Regar`, `Problemas_De_Sales`, `Tratamiento_pH`, `Sistema_Riego`, `Cantidad_Usada`, `pH_Metro`, `Conductimetro`, `Ubicacion`, `Observaciones_Generales`) VALUES
-(19, 12, '2023-10-18', 'Lago Toluka', 'James', 'Eddy', 'Amapolas', 'No', '7', 'Goteo', 222.0000, 7, 1.0000, 'Silent Hill', 'nada que comenta, agua mala'),
-(20, 12, '2023-10-19', 'Nose', 'EL cono e la madre', 'awfwf', 'wfawfwfwf', 'Si', 'PPE', 'WFWAFWAF', 101.0000, 7, 1.0000, 'DAWDWDW', 'AWDFWDAWDW'),
-(21, 12, '2023-10-19', 'PRUEBA 2', 'PRUEBA 2', 'PRUEBA 2', 'PRUEBA 2', 'Si', 'PRUEBA 2', 'PRUEBA 2', 122.0000, 7, 1.0000, 'PRUEBA 2', 'PRUEBA 2'),
-(22, 12, '2023-10-20', 'Rio Orinoco', 'Papi Chavez', 'Luis Miguel', 'Regar?', 'No lo se', 'nada', 'no se', 1000.0000, 7, 1.0000, 'Pery', 'nada que comentarnada que comentarnada que comentarnada que comentarnada que comentarnada que comentarnada que comentarnada que comentarnada que comentar');
+(24, 13, '2023-10-21', 'Laguna artificial', 'Silvia Mendoza', 'Angel Pina', 'Amapolas', 'Si', 'Enmienda', 'Goteo', 6.0000, 8, 0.5300, 'Barquisimeto', 'Cambiar sistema de riego');
 
 -- --------------------------------------------------------
 
@@ -166,16 +156,10 @@ CREATE TABLE `muestra_a_procesar` (
 --
 
 INSERT INTO `muestra_a_procesar` (`IDMuestra_A_Procesar`, `Tipo`, `Identificador`, `Analisis_A_Realizar`, `Fecha_De_Toma`, `Observaciones`) VALUES
-(11, 'Suelo', 'SUELO1', 'pH', '2023-10-18', 'Aqui me intente quitar la vida'),
-(12, 'Suelo', 'SUELO2', 'pH', '2023-10-18', 'Tambien aqui'),
-(13, 'Agua', 'Agua sucia 1', 'ParticulasFlotantes', '2023-10-18', 'Agua rara, mmosca no te enfermas'),
-(14, 'Agua', 'AAAA1', 'pH', '2023-10-19', 'DAWDAWDWD'),
-(15, 'Agua', 'AAAAPRUEBA 2', 'ParticulasFlotantes', '2023-10-19', 'PRUEBA 2'),
-(16, 'Agua', 'PRUEBA 2222', 'pH', '2023-10-19', 'PRUEBA 2'),
-(17, 'Suelo', 'SUELO PRUEB 3 s1', 'CIC', '2023-10-19', 'SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3'),
-(18, 'Suelo', 'SUELO PRUEB 3 s2', 'Todo', '2023-10-19', 'SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3SUELO PRUEB 3'),
-(19, 'Agua', 'AWAINSTER', 'Conductividad', '2023-10-03', 'insertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsertinsert'),
-(20, 'Agua', 'AWAPRUEBAFB1', 'Todo', '2023-10-20', 'nada que comentarnada que comentarnada que comentarnada que comentarnada que comentarnada que comentarnada que comentarnada que comentar');
+(23, 'Suelo', 'SUELO1', 'Todo', '2023-10-21', 'Ganaderia regenerativa'),
+(24, 'Suelo', 'SUELO2', 'CIC', '2023-10-21', 'Para entregar el miercoles'),
+(25, 'Agua', 'AGUA1', 'Todo', '2023-10-19', 'Cambiar sistema de riego'),
+(26, 'Agua', 'AGUA2', 'ParticulasFlotantes', '2023-10-20', 'Calidad de agua');
 
 -- --------------------------------------------------------
 
@@ -200,8 +184,7 @@ CREATE TABLE `muestra_suelo` (
 --
 
 INSERT INTO `muestra_suelo` (`IDMuestraSuelo`, `IDProductor`, `Fecha_Recepcion`, `Localidad`, `Municipio`, `Traido_Por`, `Profundidad`, `Uso_Anterior`, `Hectaria`) VALUES
-(22, 12, '2023-10-18', 'El sisal', 'Irribarren', 'Jose', 10, 'No habia', '8'),
-(23, 12, '2023-10-19', 'SUELO PRUEB 3', 'SUELO PRUEB 3', 'SUELO PRUEB 3', 10, 'SUELO PRUEB 3', '12');
+(24, 13, '2023-10-21', 'Lara', 'Palavecino', 'Ingeniero Ramiro Ospino', 30, 'Ganaderia', '350');
 
 -- --------------------------------------------------------
 
@@ -227,7 +210,7 @@ CREATE TABLE `productor` (
 --
 
 INSERT INTO `productor` (`ID_Productor`, `Nombre`, `Cedula_RIF`, `Direccion`, `Localidad`, `Municipio`, `Contacto`, `Traido_Por`, `Correo`, `Asesor_Tecnico`) VALUES
-(12, 'Joseph', '30161797', 'su casa', 'no se mierda', 'prueba', '12121', 'Silvia', 'jose@gmail.com', 'Kamila');
+(13, 'Juan Perez', '123456789', 'Calle 17 Carrera 2', 'Lara', 'Irribarren', '0412-1234567', 'Tecnico Jesus Alvarado', 'juan@gmail.com', 'Ingeniero Angel Ospino');
 
 -- --------------------------------------------------------
 
@@ -271,7 +254,7 @@ CREATE TABLE `userxprod` (
 --
 
 INSERT INTO `userxprod` (`idRegist`, `IdUser`, `IdProductor`) VALUES
-(14, 3, 12);
+(15, 3, 13);
 
 --
 -- Indexes for dumped tables
@@ -355,49 +338,49 @@ ALTER TABLE `userxprod`
 -- AUTO_INCREMENT for table `analisis`
 --
 ALTER TABLE `analisis`
-  MODIFY `IDAnalisis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `IDAnalisis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `facturacion`
 --
 ALTER TABLE `facturacion`
-  MODIFY `ID_Facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID_Facture` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `maguaxmap`
 --
 ALTER TABLE `maguaxmap`
-  MODIFY `IDRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `IDRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `msueloxmap`
 --
 ALTER TABLE `msueloxmap`
-  MODIFY `IDRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IDRegistro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `muestra_agua`
 --
 ALTER TABLE `muestra_agua`
-  MODIFY `ID_Muestra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID_Muestra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `muestra_a_procesar`
 --
 ALTER TABLE `muestra_a_procesar`
-  MODIFY `IDMuestra_A_Procesar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `IDMuestra_A_Procesar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `muestra_suelo`
 --
 ALTER TABLE `muestra_suelo`
-  MODIFY `IDMuestraSuelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `IDMuestraSuelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `productor`
 --
 ALTER TABLE `productor`
-  MODIFY `ID_Productor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID_Productor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -409,7 +392,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `userxprod`
 --
 ALTER TABLE `userxprod`
-  MODIFY `idRegist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idRegist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -425,7 +408,7 @@ ALTER TABLE `analisis`
 -- Constraints for table `facturacion`
 --
 ALTER TABLE `facturacion`
-  ADD CONSTRAINT `facturacion_ibfk_1` FOREIGN KEY (`IDAnalisis`) REFERENCES `analisis` (`IDAnalisis`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `facturacion_ibfk_1` FOREIGN KEY (`IDAnalisis`) REFERENCES `analisis` (`IDAnalisis`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `maguaxmap`

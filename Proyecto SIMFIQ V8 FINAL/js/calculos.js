@@ -1,14 +1,14 @@
 //Validaciones de calculos
 
 function validarDatos_Ce(Ce1, Ce2){
-    if(isNaN(Ce1) || Ce1 < 1){
+    if(isNaN(Ce1) || Ce1 <= 0){
         Swal.fire({
             type: 'warning',
             title: 'La primera Conductividad debe ser un numero mayor a 0!',                          
           }); 
         return false
     } 
-    if(isNaN(Ce2) || Ce2 < 1){
+    if(isNaN(Ce2) || Ce2 <= 0){
         Swal.fire({
             type: 'warning',
             title: 'La segunda Conductividad debe ser un numero mayor a 0!',                          
@@ -37,14 +37,14 @@ function validarDatos_pH(pH1, pH2){
 }
 
 function validarDatos_PorcentajeParticulasSuspension(peso_seco, peso_inicial){
-    if(isNaN(peso_seco) || peso_seco < 1){
+    if(isNaN(peso_seco) || peso_seco <= 0){
         Swal.fire({
             type: 'warning',
             title: 'El Peso Seco debe ser un  numero mayor a 0!',                          
           }); 
         return false
     } 
-    if(isNaN(peso_inicial) || peso_inicial < 1){
+    if(isNaN(peso_inicial) || peso_inicial <= 0){
         Swal.fire({
             type: 'warning',
             title: 'El Peso Inicial debe ser un  numero mayor a 0!',                       
@@ -55,21 +55,21 @@ function validarDatos_PorcentajeParticulasSuspension(peso_seco, peso_inicial){
 }
 
 function validarDatos_CIC(volumen, molaridad, masa){
-    if(isNaN(volumen) || volumen < 1){
+    if(isNaN(volumen) || volumen <= 0){
         Swal.fire({
             type: 'warning',
             title: 'El Volumen debe ser un  numero mayor a 0!',                          
         }); 
         return false
     }
-    if(isNaN(molaridad) || molaridad < 1){
+    if(isNaN(molaridad) || molaridad <= 0){
         Swal.fire({
             type: 'warning',
             title: 'El Molaridad debe ser un  numero mayor a 0!',                          
         }); 
         return false
     }
-    if(isNaN(masa) || masa < 1){
+    if(isNaN(masa) || masa <= 0){
         Swal.fire({
             type: 'warning',
             title: 'La Masa debe ser un  numero mayor a 0!',                          

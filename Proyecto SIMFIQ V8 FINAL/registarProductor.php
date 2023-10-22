@@ -79,8 +79,8 @@ if ($_SESSION["s_usuario"] === null){
                             unset($productor);
                         }else{
                             echo 'GUARDADO CON EXITO!! :)<br>
-                            <a href="./registrarMuestraAgua.php?idRegist='.$productor.'">Click aqui para registrar meustra de agua</a><br>
-                            <a href="./registrarMuestraSuelo.php?idRegist='.$productor.'">Click aqui para registrar meustra de suelo</a><br> ';
+                            <button><a href="./registrarMuestraAgua.php?idRegist='.$productor.'">Click aqui para registrar meustra de agua</a></button><br>
+                            <button><a href="./registrarMuestraSuelo.php?idRegist='.$productor.'">Click aqui para registrar meustra de suelo</a></button><br> ';
                             unset($productor);
                         }
                     }else{

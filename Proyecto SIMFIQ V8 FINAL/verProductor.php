@@ -121,7 +121,7 @@ if ($_SESSION["s_usuario"] === null){
                                         <th>Fuente de Agua</th>
                                         <th>Recolectada por</th>
                                         <td>
-                                        <button type="button" class="boton"><a href="reportema.php?id=' . $productor['ID_Productor'] . '">Reporte</a></button>
+                                        <button type="button" class="boton"><a href="./rpt.php?tipoMuestra=Agua&id='.$productor['ID_Productor'].'">Ver Reporte</a></button>
                                          </td>
                                     </tr>
                                 
@@ -133,7 +133,7 @@ if ($_SESSION["s_usuario"] === null){
                                     <td><a href="./verMuestrasAgua.php?buscar='.$row['ID_Muestra'].'">'.$row['ID_Muestra'].'</a></td>
                                     <td>'.$row['Fecha_Ingreso'].'</td>
                                     <td>'.$row['Fuente_Agua'].'</td>
-                                    <td>'.$row['Recolectada_Por'].'</td>
+                                    <td colspan="2">'.$row['Recolectada_Por'].'</td>
                                 </tr>
                             ';
                         }
@@ -157,7 +157,7 @@ if ($_SESSION["s_usuario"] === null){
                                         <th>Uso Anterior</th>
                                         <th>Traido por</th>
                                         <td>
-                                        <button type="button" class="boton"><a href="reportems.php?id=' . $productor['ID_Productor'] . '">Reporte</a></button>
+                                        <button type="button" class="boton"><a href="./rpt.php?tipoMuestra=Suelo&id='.$productor['ID_Productor'].'">Ver Reporte</a></button>
                                        </td>
                                     </tr>
                                 
@@ -169,7 +169,7 @@ if ($_SESSION["s_usuario"] === null){
                                     <td><a href="./verMuestrSuelo.php?buscar='.$row['IDMuestraSuelo'].'">'.$row['IDMuestraSuelo'].'</a></td>
                                     <td>'.$row['Fecha_Recepcion'].'</td>
                                     <td>'.$row['Uso_Anterior'].'</td>
-                                    <td>'.$row['Traido_Por'].'</td>
+                                    <td colspan="2">'.$row['Traido_Por'].'</td>
                                 </tr>
                             ';
                         }

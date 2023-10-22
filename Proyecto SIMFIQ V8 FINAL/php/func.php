@@ -119,8 +119,8 @@
 			return false;
 		if(limpiarCadena($analisisARealizar) != "pH" && limpiarCadena($analisisARealizar) != "Conductividad" && limpiarCadena($analisisARealizar) != "Textura" && limpiarCadena($analisisARealizar) != "CIC" && limpiarCadena($analisisARealizar) != "ParticulasFlotantes" && limpiarCadena($analisisARealizar) != "Todo")
 			return false;
-		if(!DateTime::createFromFormat("Y-m-d", $fechaDeToma))
-			return false;
+		// if(!DateTime::createFromFormat("Y-m-d", $fechaDeToma))
+		// 	return false;
 		if(limpiarCadena($observaciones) == "")
 			return false;
 		return true;

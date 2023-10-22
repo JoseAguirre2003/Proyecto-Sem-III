@@ -32,7 +32,7 @@ if ($_SESSION["s_usuario"] === null){
                     if(!$muestrasAProcesar)
                         unset($muestrasAProcesar);
                     else
-                        echo "ID de la Muestra a cambiar: ".$muestrasAProcesar['IDMuestra_A_Procesar'];
+                        echo "ID de la Muestra a cambiar: ".$muestrasAProcesar['IDMuestra_A_Procesar']."<br>";
                 }else
                     unset($_GET['id']);
 
@@ -52,7 +52,7 @@ if ($_SESSION["s_usuario"] === null){
                 }else if(isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0 && isset($_POST['eliminar'])){
                     $muestrasAProcesar = new MAaProcesar;
                     if($muestrasAProcesar->eliminarMuestraAProcesar($_GET['id'])){
-                        echo "SE ha Eliminado";
+                        echo "<br>SE ha Eliminado";
                         unset($muestrasAProcesar);
                     }else{
                         echo "<br>NO SE HA PODIDO ELIMINAR :)";

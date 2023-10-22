@@ -64,13 +64,13 @@ if ($_SESSION["s_usuario"] === null){
                                 </tr>
                             </tbody>
                         </table>
-                        <a href="./registrarMuestrasAAProcesar.php?id='.$muestras['IDMuestra_A_Procesar'].'">Editar o eliminar</a><br>
+                        <button><a href="./registrarMuestrasAAProcesar.php?id='.$muestras['IDMuestra_A_Procesar'].'">Editar o eliminar</a></button><br>
                     ';
             $resultados = new Resultados;
             $resultados = $resultados->buscarResultados($muestras['IDMuestra_A_Procesar']);
             if(!$resultados){
                     echo 'No hay ningun resultado cargado :(<br>
-                    <a href="./calculos.php?id=' . $muestras['IDMuestra_A_Procesar'] . '">Calcular resultados</a>';
+                    <button><a href="./calculos.php?id=' . $muestras['IDMuestra_A_Procesar'] . '">Calcular resultados</a></button>';
             }else{
                 echo '<table id="resultado">
                         <tbody>
@@ -78,8 +78,8 @@ if ($_SESSION["s_usuario"] === null){
                                 <th colspan="3">Resultados:</th>
                             </tr>
                             <tr>
-                                <td>Tipo:</td>
-                                <td id="tipo" colspan="2">' . $resultados['IDAnalisis'] . '</td>
+                                <td>ID:</td>
+                                <td id="id" colspan="2">' . $resultados['IDAnalisis'] . '</td>
                             </tr>
                 ';
                 if($resultados['pH'] != null)
